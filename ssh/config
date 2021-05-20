@@ -1,0 +1,54 @@
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+ ServerAliveInterval 30
+ ServerAliveCountMax 6
+  User build
+  DynamicForward 9999
+  ForwardAgent yes
+ ForwardAgent yes
+ User chesterbr
+ ForwardAgent no
+ User chesterbr
+ User chester
+ ForwardAgent yes
+Host chester.me
+ User chester
+Host ghe-default vagrant-default
+  User admin
+  Port 122
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentitiesOnly yes
+  LogLevel QUIET
+  ForwardAgent no
+  ControlMaster auto
+  ControlPath ~/.ssh/socket-%r@%h:%p
+  ControlPersist 10m
+  IdentityFile ~/.ssh/id_ed25519
+  DynamicForward 9999
+  ForwardAgent yes
+Host gh-shell
+  User chesterbr
+
+
+Host whatever
+  User root
+  Port 122
+  ForwardAgent yes
+  DynamicForward 9999
+  UserKnownHostsFile /dev/null
+
+Host dotcom-on-my-instance
+   ForwardAgent true
+   User admin
+   Port 122
+   StrictHostKeyChecking no
+
+  User chesterbr
+  Port 122
+  User chesterbr
+  ForwardAgent yes
+  IdentityFile /Users/chesterbr/.ssh/id_rsa
