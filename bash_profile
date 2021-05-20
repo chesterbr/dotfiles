@@ -1,9 +1,12 @@
 # alias atom="atom-beta"
 
-# git-prompt is is needed for __git_ps1 to work
 if [[ "$(uname -s)" == "Darwin" ]]
 then
+  # macOS
+
+  # git-prompt is is needed for __git_ps1 to work
   source /usr/local/etc/bash_completion.d/git-prompt.sh
+
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
@@ -13,9 +16,13 @@ then
 
   # because hubot-classic and heaven said so
   eval "$(nodenv init -)"
-
 else
+  # Linux
+
+  # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
+
+  alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
 fi
 
 export PS1="\h:\[\e[33m\]\w\[\e[m\] \u\[\033[32m\]\$(__git_ps1)\[\033[00m\]\$ "
