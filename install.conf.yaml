@@ -2,7 +2,8 @@
 
 - link:
     ~/.bash_profile: bash_profile
-    ~/.gitconfig: gitconfig
+    ~/.gitconfig:
+        path: gitconfig
         force: true
     ~/.ssh/config:
         path: ssh/config
