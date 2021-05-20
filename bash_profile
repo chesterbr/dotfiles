@@ -4,10 +4,13 @@ alias update-e2-cert="echo -n | openssl s_client -connect 172.28.128.4:8443 | se
 alias fix-tls-handshake="killall firefox; sleep 1; cd ~/Library/Application\ Support/Firefox/Profiles/dde02f1s.chester-work; mv cert9.db cert9.db.old; echo All done, just open Firefox again"
 # alias atom="atom-beta"
 
-# git-prompt is is needed for __git_ps1 to work
 if [[ "$(uname -s)" == "Darwin" ]]
 then
+  # macOS
+
+  # git-prompt is is needed for __git_ps1 to work
   source /usr/local/etc/bash_completion.d/git-prompt.sh
+
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
@@ -17,9 +20,13 @@ then
 
   # because hubot-classic and heaven said so
   eval "$(nodenv init -)"
-
 else
+  # Linux
+
+  # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
+
+  alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
 fi
 
 export PS1="\h:\[\e[33m\]\w\[\e[m\] \u\[\033[32m\]\$(__git_ps1)\[\033[00m\]\$ "
