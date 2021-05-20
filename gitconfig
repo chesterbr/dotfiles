@@ -6,15 +6,19 @@
 	user = chesterbr
 [push]
 	default = current
+[url "https://github.com/"]
+  # This is for codespaces (although not a terrible idea in general, FWIW)
+  insteadOf = git@github.com:
 [credential]
-	helper = osxkeychain
+	# Use bin/git-credential-dotfiles
+	helper = dotfiles
 [alias]
 	co = checkout
 	branchdate = branch --sort='-authordate:iso8601' --format='%(authordate:relative)%09%(refname:short)'
 	branch-cleanup = "!git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d #"
 	test="! bash .git/hooks/pre-commit test"
 [i18n]
-#	commitEncoding = UTF-16 
+#	commitEncoding = UTF-16
 [http]
 	sslVerify = true
 [filter "lfs"]
