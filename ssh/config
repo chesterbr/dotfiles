@@ -1,0 +1,74 @@
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+ ServerAliveInterval 30
+ ServerAliveCountMax 6
+Host *.bpdev-us-east-1.github.net
+  User build
+  DynamicForward 9999
+  ForwardAgent yes
+  RemoteForward /run/user/1001/gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
+Host remote.github.net remote.github.com
+ ForwardAgent yes
+ User chesterbr
+Host github.com *.github.net *.githubapp.com
+ ForwardAgent no
+ User chesterbr
+Host tv-raspberrypi
+ User chester
+ ForwardAgent yes
+Host chester.me
+ User chester
+Host ghe-default vagrant-default
+  HostName 172.28.128.4
+  User admin
+  Port 122
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentitiesOnly yes
+  LogLevel QUIET
+  ForwardAgent no
+  IdentityFile /Users/chesterbr/github/enterprise2/id_test
+  ControlMaster auto
+  ControlPath ~/.ssh/socket-%r@%h:%p
+  ControlPersist 10m
+Host enterprise2-dev*-cp1-prd.iad.github.net
+  IdentityFile ~/.ssh/id_ed25519
+  ProxyJump %r@remote.github.net
+  DynamicForward 9999
+  ForwardAgent yes
+Host gh-shell
+  User chesterbr
+  HostName shell.service.cp1-iad.github.net
+  ProxyJump bastion.githubapp.com
+Host tv-pi.local
+ HostName tv-pi.local
+
+
+Host whatever
+  HostName 10.212.1.4
+  User root
+  IdentityFile /Users/chesterbr/github/enterprise2/id_test
+  Port 122
+  ForwardAgent yes
+  DynamicForward 9999
+  UserKnownHostsFile /dev/null
+  ProxyJump chesterbr-3b6d94f8a.service.bpdev-us-east-1.github.net
+
+Host dotcom-on-my-instance
+   HostName 10.0.1.171
+   ForwardAgent true
+   User admin
+   Port 122
+   ProxyJump chesterbr-3b6d94f8a.service.bpdev-us-east-1.github.net
+   IdentityFile ~/github/enterprise2/id_test
+   StrictHostKeyChecking no
+
+Host *.ghaedev.com
+  User chesterbr
+  Port 122
+  User chesterbr
+  ForwardAgent yes
+  IdentityFile /Users/chesterbr/.ssh/id_rsa

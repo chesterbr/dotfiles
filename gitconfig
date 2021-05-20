@@ -1,0 +1,32 @@
+[user]
+	name = Carlos Duarte Do Nascimento
+	email = cd@pobox.com
+	signingkey = 8D40FD018206BE95
+[github]
+	user = chesterbr
+[push]
+	default = current
+[credential]
+	helper = osxkeychain
+[alias]
+	co = checkout
+	branchdate = branch --sort='-authordate:iso8601' --format='%(authordate:relative)%09%(refname:short)'
+	branch-cleanup = "!git branch --merged | egrep -v \"(^\\*|master|dev)\" | xargs git branch -d #"
+	test="! bash .git/hooks/pre-commit test"
+[i18n]
+#	commitEncoding = UTF-16 
+[http]
+	sslVerify = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = true
+[gpg]
+	program = /usr/local/bin/gpg
+[core]
+	excludesfile = /Users/chesterbr/.gitignore_global
+[pull]
+	rebase = false
