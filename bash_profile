@@ -27,7 +27,7 @@ export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 
-export PATH="~/bin/:$PATH"
+export PATH=~/bin/:$PATH
 
 # because hubot-classic and heaven said so
 eval "$(nodenv init -)"
