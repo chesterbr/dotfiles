@@ -27,7 +27,7 @@
 	process = git-lfs filter-process
 	required = true
 [commit]
-	gpgsign = true
+	# gpgsign = true
 [core]
 	excludesfile = /Users/chesterbr/.gitignore_global
 [pull]
