@@ -3,6 +3,7 @@
 - link:
     ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
+        force: true
     ~/.ssh/config:
         path: ssh/config
         create: true
