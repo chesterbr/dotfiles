@@ -4,7 +4,7 @@
     ~/.bash_profile: bash_profile
     ~/.gitconfig:
         path: gitconfig
-        force: true
+        force: false
     ~/.ssh/config:
         path: ssh/config
         create: true
