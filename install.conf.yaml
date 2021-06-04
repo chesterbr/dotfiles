@@ -2,7 +2,9 @@
 
 - link:
     ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
+    ~/.bashrc:
+        path: bashrc
+        force: true
     ~/.gitconfig:
         path: gitconfig
         force: true
