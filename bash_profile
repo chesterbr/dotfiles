@@ -45,7 +45,7 @@ else
   ### Linux/Codespaces stuff
 
   # GitHub
-  alias g="cd ~/code/github/github"
+  alias g="cd /workspaces/github"
 
   # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
