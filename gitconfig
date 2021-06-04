@@ -30,5 +30,6 @@
 	# gpgsign = true
 [core]
 	excludesfile = /Users/chesterbr/.gitignore_global
+	editor = vim
 [pull]
 	rebase = false
