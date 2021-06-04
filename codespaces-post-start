@@ -1,5 +1,0 @@
-#!/bin/sh
-# Run by github/github codespaces after starting
-
-apt-get install -y \
-  bash-completion
