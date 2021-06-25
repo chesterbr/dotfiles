@@ -86,6 +86,8 @@ fi
 
 ### OS-neutral stuff
 
+alias ghdebug="BYEBUGDAP=1 bin/server --debug"
+
 export PS1="\h:\[\e[33m\]\w\[\e[m\] \u\[\033[32m\]\$(__git_ps1)\[\033[00m\]\$ "
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
