@@ -14,6 +14,64 @@ prepend_to_path()
   fi
 }
 
+# Codespaces bash prompt theme, modified for my prefs
+__bash_prompt() {
+    # \[\033[0;30m\] = Black - Regular
+    # \[\033[0;31m\] = Red
+    # \[\033[0;32m\] = Green
+    # \[\033[0;33m\] = Yellow
+    # \[\033[0;34m\] = Blue
+    # \[\033[0;35m\] = Purple
+    # \[\033[0;36m\] = Cyan
+    # \[\033[0;37m\] = White
+    # \[\033[1;30m\] = Black - Bold
+    # \[\033[1;31m\] = Red
+    # \[\033[1;32m\] = Green
+    # \[\033[1;33m\] = Yellow
+    # \[\033[1;34m\] = Blue
+    # \[\033[1;35m\] = Purple
+    # \[\033[1;36m\] = Cyan
+    # \[\033[1;37m\] = White
+    # \[\033[4;30m\] = Black - Underline
+    # \[\033[4;31m\] = Red
+    # \[\033[4;32m\] = Green
+    # \[\033[4;33m\] = Yellow
+    # \[\033[4;34m\] = Blue
+    # \[\033[4;35m\] = Purple
+    # \[\033[4;36m\] = Cyan
+    # \[\033[4;37m\] = White
+    # \[\033[40m\]   = Black - Background
+    # \[\033[41m\]   = Red
+    # \[\033[42m\]   = Green
+    # \[\033[43m\]   = Yellow
+    # \[\033[44m\]   = Blue
+    # \[\033[45m\]   = Purple
+    # \[\033[46m\]   = Cyan
+    # \[\033[47m\]   = White
+    # \[\033[0m\]    = Text Reset
+    local hostname="\[\033[0m\]\h\[\033[0m\]"
+    local userpart='`export XIT=$? \
+        && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;37m\]@${GITHUB_USER}" || echo -n "\[\033[0;37m\]\u" \
+        `'
+    local gitbranch='`\
+        export BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); \
+        if [ "${BRANCH}" = "HEAD" ]; then \
+            export BRANCH=$(git describe --contains --all HEAD 2>/dev/null); \
+        fi; \
+        if [ "${BRANCH}" != "" ]; then \
+            echo -n "\[\033[0;36m\](\[\033[1;31m\]${BRANCH}" \
+            && if git ls-files --error-unmatch -m --directory --no-empty-directory -o --exclude-standard ":/*" > /dev/null 2>&1; then \
+                    echo -n " \[\033[1;33m\]✗"; \
+            fi \
+            && echo -n "\[\033[0;36m\]) "; \
+        fi`'
+    local yellow='\[\033[0;33m\]'
+    local removecolor='\[\033[0m\]'
+    PS1="${hostname}:${yellow}\w ${userpart} ${gitbranch}${removecolor}\$ "
+    unset -f __bash_prompt
+}
+__bash_prompt
+
 if [[ "$(uname -s)" == "Darwin" ]]
 then
   ### macOS stuff
@@ -72,23 +130,17 @@ else
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
   fi
-
-  # If this is an xterm set the title to user@host:dir
-  case "$TERM" in
-  xterm*|rxvt*)
-      PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-      ;;
-  *)
-      ;;
-  esac
-
 fi
 
 ### OS-neutral stuff
 
+# GitHub
 alias ghdebug="BYEBUGDAP=1 bin/server --debug"
 
-export PS1="\h:\[\e[33m\]\w\[\e[m\] \u\[\033[32m\]\$(__git_ps1)\[\033[00m\]\$ "
+# Codespaces default profile had this
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
