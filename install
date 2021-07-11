@@ -3,7 +3,7 @@
 set -e
 
 if [[ "$(uname -s)" == "Linux" ]]; then
-  apt-get install -y \
+  sudo apt-get install -y \
     bash-completion
 fi
 
