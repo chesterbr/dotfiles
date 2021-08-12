@@ -136,7 +136,8 @@ fi
 
 # GitHub
 alias dotcom="GITHUB_CODESPACES_CUSTOM_PORT=1 bin/server --debug"
-alias ghdebug="BYEBUGDAP=1 bin/server --debug" # deprecated
+# Will try this again when it matures a bit
+# alias ghdebug="BYEBUGDAP=1 bin/server --debug"
 
 # Codespaces default profile had this
 export NVS_HOME="$HOME/.nvs"
