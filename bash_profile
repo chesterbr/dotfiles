@@ -131,7 +131,8 @@ fi
 ### OS-neutral stuff
 
 # GitHub
-alias ghdebug="BYEBUGDAP=1 bin/server --debug" # deprecated
+# Will try this again when it matures a bit
+# alias ghdebug="BYEBUGDAP=1 bin/server --debug"
 
 # Codespaces default profile had this
 export NVS_HOME="$HOME/.nvs"
