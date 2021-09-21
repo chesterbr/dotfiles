@@ -22,12 +22,12 @@ then
   fi
   # TODO: Figure out rbenv on codespaces/linux
   # (and maybe also if macOS doesn't have it installed)
-  if [[ ":$PATH:" != *"rbenv/shims:"* ]]; then
-    eval "$(rbenv init -)"
-  fi
+  eval "$(rbenv init -)"
 
   # Had this for hubot-classic and heaven
   # eval "$(nodenv init -)"
+
+  alias dotfiles="cd ~/.dotfiles"
 else
   ### Linux/Codespaces stuff
 
