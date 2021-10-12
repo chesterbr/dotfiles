@@ -136,6 +136,8 @@ fi
 
 # GitHub
 alias dotcom="GITHUB_CODESPACES_CUSTOM_PORT=1 bin/server --debug"
+alias t="bin/rails test"
+alias ta="TEST_ALL_FEATURES=1 bin/rails test"
 # Will try this again when it matures a bit
 # alias ghdebug="BYEBUGDAP=1 bin/server --debug"
 
