@@ -91,21 +91,27 @@ then
 else
   ### Linux/Codespaces stuff
 
-  # GitHub
-  alias g="cd /workspaces/github"
-
   # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
 
-  # Just so I can find this easily
-  alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
+  # GitHub
+  alias g="cd /workspaces/github"
 
-  if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-      . /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-      . /etc/bash_completion
+  if [ -n $CODESPACES ]; then
+    # git hooks magic
+    [ -f /workspaces/github/script/git-hooks/pre-push ] && ln -s /workspaces/github/script/git-hooks/pre-push /workspaces/github/.git/hooks/pre-push
+
+    # Just so I can find this easily
+    alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
+
+    if ! shopt -oq posix; then
+      if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+      elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+      fi
     fi
+
   fi
 
   # enable color support of ls and also add handy aliases
