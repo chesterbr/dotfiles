@@ -65,8 +65,6 @@ if [[ "$(uname -s)" == "Darwin" ]]
 then
   ### macOS stuff
 
-  # GitHub
-
   # I don't care about your shell-of-the-week, Apple
   export BASH_SILENCE_DEPRECATION_WARNING=1
 
@@ -126,23 +124,9 @@ fi
 ### OS-neutral stuff
 
 # GitHub
-alias t="bin/rails test"
-alias ta="TEST_ALL_FEATURES=1 bin/rails test"
-# Will try this again when it matures a bit
-# alias ghdebug="BYEBUGDAP=1 bin/server --debug"
-
-# Codespaces default profile had this
-export NVS_HOME="$HOME/.nvs"
-[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
-prepend_to_path /usr/local/opt/mysql@5.7/bin
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
-
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-# Enable to use https://github.localhost (or don't, who knows?)
-# export GH_SSL=1
