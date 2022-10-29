@@ -15,6 +15,7 @@
         path: ssh/allowed_signers
         create: true
     ~/.vimrc: vimrc
+    ~/.gemrc: gemrc
     ~/bin:
         path: bin/
         create: true
