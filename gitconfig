@@ -33,3 +33,5 @@
 	editor = vim
 [pull]
 	rebase = false
+[gpg]
+	format = ssh
