@@ -117,5 +117,4 @@ export PROMPT_DIRTRIM=2
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
 
-export FRUM_DIR=~/.cache/frum
-eval "$(frum init)"
+eval "$(rbenv init - bash)"
