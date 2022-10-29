@@ -74,12 +74,6 @@ then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
-  # phasing out rbenv in favour of frum; new life, new tools, I guess
-  # eval "$(rbenv init -)"
-
-
-  # Had this for hubot-classic and heaven
-  # eval "$(nodenv init -)"
 
   alias dotfiles="cd ~/.dotfiles"
 else
@@ -88,13 +82,7 @@ else
   # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
 
-  # GitHub
-  alias g="cd /workspaces/github"
-
   if [ -n $CODESPACES ]; then
-    # git hooks magic
-    [ -f /workspaces/github/script/git-hooks/pre-push ] && ln -s /workspaces/github/script/git-hooks/pre-push /workspaces/github/.git/hooks/pre-push
-
     # Just so I can find this easily
     alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
 
@@ -128,3 +116,6 @@ export PROMPT_DIRTRIM=2
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
+
+export FRUM_DIR=~/.cache/frum
+eval "$(frum init)"
