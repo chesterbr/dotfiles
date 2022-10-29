@@ -74,9 +74,9 @@ then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
-  # TODO: Figure out rbenv on codespaces/linux
-  # (and maybe also if macOS doesn't have it installed)
-  eval "$(rbenv init -)"
+  # phasing out rbenv in favour of frum; new life, new tools, I guess
+  # eval "$(rbenv init -)"
+
 
   # Had this for hubot-classic and heaven
   # eval "$(nodenv init -)"
@@ -122,8 +122,6 @@ else
 fi
 
 ### OS-neutral stuff
-
-# GitHub
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
