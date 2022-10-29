@@ -11,6 +11,9 @@
     ~/.ssh/config:
         path: ssh/config
         create: true
+    ~/.ssh/allowed_signers:
+        path: ssh/allowed_signers
+        create: true
     ~/.vimrc: vimrc
     ~/bin:
         path: bin/
