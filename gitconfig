@@ -1,7 +1,7 @@
 [user]
 	name = Carlos Duarte Do Nascimento
 	email = cd@pobox.com
-	signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDpmtj+CcEKjZFh16iGgmnQKxwE5wejEqVWST6IS0oy5M+cKiRV/MYE2+t4+Z58RM3X+pWI6R72j3HbPKgB7JM7foIgBexmmxyFDbpEZRcHB7sgdyCYXa+RQviDC1vBo8493gPFpLsAPiU4OPPeTh7jmdvZjroi0ueD8nrNInIx4G9pwRZVj4rAjX/aVEtRZiMMiAD+KwnuWW/r/RyxzjXSo8W0tsIJ96Cp1Y9/uSd1qTJqkdFdMdrAoMNqY4aTMaoFeeYNcAox7cEO1Pwyz4HgKU7MOKsC7ocGHgHlu992D17Cl8hTowS/4zeCe7tg7kN8ng/4qV+BVzioiXQsWEjOS9wba7psaapYgeUcoaqROoG0mICWFXEFwhmV6kspXCgGViH2EuBHZBMCN1q77pDLLO9eB+WKApvweBiSPJvPvS9IMhi5NauOdrrHm9p6UF9m5Sk0y+PPs+RsZBa1wDSPxZJX4mZDUerGB+uRlHvna/EfaHSIt9pnH2a2/gVF41X9fnvM013+9aoF33/NLONtXRxA4VrtbKKpxKujJE48grveo0zxdJlz6Cu1QC1sMX4lGXO9YeN/xFxJ9nq89BT5CNCF9iSzVAot3ifoH9ISs68eN1mqFmwyYkuVRQMfhtEbHnMp5grxM/Tm9bG6Sp89ACWLd9HLDIEPZkDn2XyM5w== cd@pobox.com (2017)\n
+	signingkey = ~/.ssh/id_rsa.pub
 [github]
 	user = chesterbr
 [push]
