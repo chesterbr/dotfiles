@@ -1,7 +1,7 @@
 # Place wildcards in the end, so they can be overridden
 # (ssh always picks the first match)
 
-Host chester.me
+Host cruzalinhas.com
  User chester
 
 Host *
