@@ -114,6 +114,9 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
+alias m='cd ~/code/chesterbr/minitruco-android'
+alias ugm='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
+
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
 
