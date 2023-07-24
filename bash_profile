@@ -1,68 +1,71 @@
 # This file is ran from ~/.bashrc (because Codespaces), so keep it idempotent!
 # (although the if below may alleviate that need)
 
+# Don't sweat if you can't find a file (some are OS-specific, some require packages)
+# shellcheck disable=SC1091
+
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
-prepend_to_path()
-{
+prepend_to_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-      PATH="$1${PATH:+":$PATH"}"
+    PATH="$1${PATH:+":$PATH"}"
   fi
 }
 
 # Codespaces bash prompt theme, modified for my prefs
 __bash_prompt() {
-    # \[\033[0;30m\] = Black - Regular
-    # \[\033[0;31m\] = Red
-    # \[\033[0;32m\] = Green
-    # \[\033[0;33m\] = Yellow
-    # \[\033[0;34m\] = Blue
-    # \[\033[0;35m\] = Purple
-    # \[\033[0;36m\] = Cyan
-    # \[\033[0;37m\] = White
-    # \[\033[1;30m\] = Black - Bold
-    # \[\033[1;31m\] = Red
-    # \[\033[1;32m\] = Green
-    # \[\033[1;33m\] = Yellow
-    # \[\033[1;34m\] = Blue
-    # \[\033[1;35m\] = Purple
-    # \[\033[1;36m\] = Cyan
-    # \[\033[1;37m\] = White
-    # \[\033[4;30m\] = Black - Underline
-    # \[\033[4;31m\] = Red
-    # \[\033[4;32m\] = Green
-    # \[\033[4;33m\] = Yellow
-    # \[\033[4;34m\] = Blue
-    # \[\033[4;35m\] = Purple
-    # \[\033[4;36m\] = Cyan
-    # \[\033[4;37m\] = White
-    # \[\033[40m\]   = Black - Background
-    # \[\033[41m\]   = Red
-    # \[\033[42m\]   = Green
-    # \[\033[43m\]   = Yellow
-    # \[\033[44m\]   = Blue
-    # \[\033[45m\]   = Purple
-    # \[\033[46m\]   = Cyan
-    # \[\033[47m\]   = White
-    # \[\033[0m\]    = Text Reset
-    local hostname="\[\033[0m\]\h\[\033[0m\]"
-    local userpart='`export XIT=$? \
+  # \[\033[0;30m\] = Black - Regular
+  # \[\033[0;31m\] = Red
+  # \[\033[0;32m\] = Green
+  # \[\033[0;33m\] = Yellow
+  # \[\033[0;34m\] = Blue
+  # \[\033[0;35m\] = Purple
+  # \[\033[0;36m\] = Cyan
+  # \[\033[0;37m\] = White
+  # \[\033[1;30m\] = Black - Bold
+  # \[\033[1;31m\] = Red
+  # \[\033[1;32m\] = Green
+  # \[\033[1;33m\] = Yellow
+  # \[\033[1;34m\] = Blue
+  # \[\033[1;35m\] = Purple
+  # \[\033[1;36m\] = Cyan
+  # \[\033[1;37m\] = White
+  # \[\033[4;30m\] = Black - Underline
+  # \[\033[4;31m\] = Red
+  # \[\033[4;32m\] = Green
+  # \[\033[4;33m\] = Yellow
+  # \[\033[4;34m\] = Blue
+  # \[\033[4;35m\] = Purple
+  # \[\033[4;36m\] = Cyan
+  # \[\033[4;37m\] = White
+  # \[\033[40m\]   = Black - Background
+  # \[\033[41m\]   = Red
+  # \[\033[42m\]   = Green
+  # \[\033[43m\]   = Yellow
+  # \[\033[44m\]   = Blue
+  # \[\033[45m\]   = Purple
+  # \[\033[46m\]   = Cyan
+  # \[\033[47m\]   = White
+  # \[\033[0m\]    = Text Reset
+  local hostname="\[\033[0m\]\h\[\033[0m\]"
+  #shellcheck disable=SC2016
+  local userpart='`export XIT=$? \
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;37m\]@${GITHUB_USER}" || echo -n "\[\033[0;37m\]\u" \
         `'
-    local gitbranch='\[\033[0;36m\](\[\033[1;31m\]$(git symbolic-ref --short HEAD 2>/dev/null)\[\033[0;36m\])'
-    local yellow='\[\033[0;33m\]'
-    local removecolor='\[\033[0m\]'
-    PS1="${hostname}:${yellow}\w ${userpart} ${gitbranch}${removecolor}\$ "
-    unset -f __bash_prompt
+  #shellcheck disable=SC2016
+  local gitbranch='\[\033[0;36m\](\[\033[1;31m\]$(git symbolic-ref --short HEAD 2>/dev/null)\[\033[0;36m\])'
+  local yellow='\[\033[0;33m\]'
+  local removecolor='\[\033[0m\]'
+  PS1="${hostname}:${yellow}\w ${userpart} ${gitbranch}${removecolor}\$ "
+  unset -f __bash_prompt
 }
 __bash_prompt
 
-if [[ "$(uname -s)" == "Darwin" ]]
-then
+if [[ "$(uname -s)" == "Darwin" ]]; then
   ### macOS stuff
 
   # I don't care about your shell-of-the-week, Apple
@@ -71,6 +74,7 @@ then
   # git-prompt is is needed for __git_ps1 to work
   source /usr/local/etc/bash_completion.d/git-prompt.sh
 
+  # shellcheck disable=SC2046
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
@@ -82,7 +86,7 @@ else
   # git-prompt is is needed for __git_ps1 to work
   source /etc/bash_completion.d/git-prompt
 
-  if [ -n $CODESPACES ]; then
+  if [ -n "$CODESPACES" ]; then
     # Just so I can find this easily
     alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles; git status"
 
