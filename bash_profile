@@ -75,7 +75,7 @@ then
     . $(brew --prefix)/etc/bash_completion
   fi
 
-  alias dotfiles="cd ~/.dotfiles"
+  alias dotfiles="cd ~/.dotfiles; git status"
 else
   ### Linux/Codespaces stuff
 
@@ -84,7 +84,7 @@ else
 
   if [ -n $CODESPACES ]; then
     # Just so I can find this easily
-    alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles"
+    alias dotfiles="cd /workspaces/.codespaces/.persistedshare/dotfiles; git status"
 
     if ! shopt -oq posix; then
       if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -116,6 +116,7 @@ export PROMPT_DIRTRIM=2
 
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias ugm='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
+alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
