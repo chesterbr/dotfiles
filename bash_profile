@@ -119,7 +119,7 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
 alias m='cd ~/code/chesterbr/minitruco-android'
-alias ugm='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
+alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
 
 prepend_to_path ~/bin
