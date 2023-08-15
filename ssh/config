@@ -5,8 +5,8 @@ Host cruzalinhas.com
  User chester
 
 Host *
- AddKeysToAgent yes
  UseKeychain yes
+ AddKeysToAgent yes
  IdentityFile ~/.ssh/id_rsa
  ServerAliveInterval 30
  ServerAliveCountMax 6
