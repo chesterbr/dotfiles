@@ -121,6 +121,7 @@ export PROMPT_DIRTRIM=2
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
+alias ghclone='__ghclone() { cd ~/code && gh repo clone "$1" "$1" && cd "$1" ; }; __ghclone'
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
