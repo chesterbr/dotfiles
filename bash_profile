@@ -80,6 +80,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   fi
 
   alias dotfiles="cd ~/.dotfiles; git status"
+
+  # Forcing JDK 21 because of miniTruco
+  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 else
   ### Linux/Codespaces stuff
 
