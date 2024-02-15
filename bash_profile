@@ -83,6 +83,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
   # Forcing JDK 21 because of miniTruco
   export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+
+  # Get the passphrase and add the ssh key, if not already there
+  ssh-add -l | grep -q "/Users/chesterbr/.ssh/id_rsa" || ssh-add
 else
   ### Linux/Codespaces stuff
 
@@ -134,3 +137,4 @@ eval "$(rbenv init - bash)"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+source "$HOME/.cargo/env"
