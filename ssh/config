@@ -10,3 +10,6 @@ Host *
  IdentityFile ~/.ssh/id_rsa
  ServerAliveInterval 30
  ServerAliveCountMax 6
+
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
