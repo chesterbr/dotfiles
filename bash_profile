@@ -83,6 +83,12 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
   # Forcing JDK 21 because of miniTruco
   export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+
+  # Ensure ssh key is on ssh-agent (with passphrase from keychain)
+  if ! ssh-add -l | grep -q -i "ed25519"; then
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+  fi
+
 else
   ### Linux/Codespaces stuff
 
