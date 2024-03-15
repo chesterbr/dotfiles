@@ -6,5 +6,5 @@ Just my dotfiles.　Not much to see here.
   - clone this to `~/.dotfiles` and run `./install` to symlink everything
   - (wonder if I could automate these) on a new mac, run:
     - `chsh -s /bin/bash` to use bash as default shell
-    - `ssh-add -K ~/.ssh/id_rsa` to add the ssh key passphrase to the Keychain
+    - `ssh-add -K ~/.ssh/id_KEYTYPE` to add the ssh key passphrase to the Keychain (`KEYTYPE` is RSA, ed25519, etc.)
   - if you add a new file, edit `install.conf.yaml` to include it

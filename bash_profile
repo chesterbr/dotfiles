@@ -85,7 +85,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   export JAVA_HOME=$(/usr/libexec/java_home -v 21)
 
   # Get the passphrase and add the ssh key, if not already there
-  ssh-add -l | grep -q "/Users/chesterbr/.ssh/id_rsa" || ssh-add
+  ssh-add -l | grep -q "/Users/chesterbr/.ssh/id_ed25519" || ssh-add
 else
   ### Linux/Codespaces stuff
 

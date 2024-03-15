@@ -1,3 +1,8 @@
+# This was preconfigured on my work machine, seems to be a Banyan Security
+# configuration (cf.: https://shorturl.at/jwOTY); if it's not around it won't
+# hurt (per https://unix.stackexchange.com/a/577143), so let's leave it here
+Include bnn.config
+
 # Place wildcards in the end, so they can be overridden
 # (ssh always picks the first match)
 
@@ -7,7 +12,7 @@ Host cruzalinhas.com
 Host *
  UseKeychain yes
  AddKeysToAgent yes
- IdentityFile ~/.ssh/id_rsa
+ IdentityFile ~/.ssh/id_ed25519.pub
  ServerAliveInterval 30
  ServerAliveCountMax 6
 
