@@ -2,11 +2,6 @@
 
 set -e
 
-if [[ "$(uname -s)" == "Linux" ]]; then
-  sudo apt-get install -y \
-    bash-completion
-fi
-
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
