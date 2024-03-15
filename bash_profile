@@ -71,6 +71,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   # I don't care about your shell-of-the-week, Apple
   export BASH_SILENCE_DEPRECATION_WARNING=1
 
+  # Homebrew (hope they don't change this again)
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
   # git-prompt is is needed for __git_ps1 to work
   source /usr/local/etc/bash_completion.d/git-prompt.sh
 
