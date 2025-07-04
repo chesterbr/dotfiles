@@ -74,9 +74,6 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   # Homebrew (hope they don't change this again)
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  # git-prompt is is needed for __git_ps1 to work
-  source /usr/local/etc/bash_completion.d/git-prompt.sh
-
   # shellcheck disable=SC2046
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
@@ -94,9 +91,6 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
 else
   ### Linux/Codespaces stuff
-
-  # git-prompt is is needed for __git_ps1 to work
-  source /etc/bash_completion.d/git-prompt
 
   if [ -n "$CODESPACES" ]; then
     # Just so I can find this easily
