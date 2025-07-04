@@ -6,6 +6,6 @@ Just my dotfiles.　Not much to see here.
   - (wonder if I could automate these) On a new mac, run:
     - `chsh -s /bin/bash` to use bash as default shell
     - `ssh-add -K ~/.ssh/id_KEYTYPE` to add the ssh key passphrase to the Keychain (`KEYTYPE` is RSA, ed25519, etc.)
-    - Install [Homebrew](https://brew.sh/), then `git` and `gh` formulas
+    - Install [Homebrew](https://brew.sh/), then `brew install git gh bash-completion rbenv ruby-build ruby-install`
   - Clone this anywhere (e.g. `~/code/chesterbr/dotfiles` and run `./install` to symlink everything
   - if you add a new file, edit `install.conf.yaml` to include it
