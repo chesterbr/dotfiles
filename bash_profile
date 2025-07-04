@@ -130,6 +130,10 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
+# Work stuff (we don't love spring, but rely on lefthook for pre-commit hooks))
+export DISABLE_SPRING=true
+export LEFTHOOK_BIN=bin/lefthook
+
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
