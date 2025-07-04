@@ -81,8 +81,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 
   alias dotfiles="cd ~/.dotfiles; git status"
 
-  # Forcing JDK 21 because of miniTruco
-  export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+  # Forcing JDK 21 because of miniTruco, but only if available
+  if command -v /usr/libexec/java_home >/dev/null 2>&1; then
+    JAVA_21_HOME=$(/usr/libexec/java_home -v 21 2>/dev/null)
+    if [ -n "$JAVA_21_HOME" ]; then
+      export JAVA_HOME="$JAVA_21_HOME"
+    fi
+  fi
 
   # Ensure ssh key is on ssh-agent (with passphrase from keychain)
   if ! ssh-add -l | grep -q -i "ed25519"; then
