@@ -134,7 +134,7 @@ export DISABLE_SPRING=true
 export LEFTHOOK_BIN=bin/lefthook
 
 alias m='cd ~/code/chesterbr/minitruco-android'
-alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
+alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d; [ -x bin/update ] && bin/update'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
 # shellcheck disable=SC2142
 alias ghclone='__ghclone() { cd ~/code && gh repo clone "$1" "$1" && cd "$1" ; }; __ghclone'
