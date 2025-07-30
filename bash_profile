@@ -1,8 +1,7 @@
-# This file is ran from ~/.bashrc (because Codespaces), so keep it idempotent!
-# (although the if below may alleviate that need)
+# shellcheck disable=SC2148 # This will be aliased to .bash_profile, which doesn't need a shebang
+# shellcheck disable=SC1091 # Sometimes we won't find (OS/package-specific) files, don't sweat
 
-# Don't sweat if you can't find a file (some are OS-specific, some require packages)
-# shellcheck disable=SC1091
+# Human: This file is ran from ~/.bashrc (because Codespaces), so keep it idempotent!
 
 # If not running interactively, don't do anything
 case $- in
@@ -95,7 +94,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   fi
 
 else
-  ### Linux/Codespaces stuff
+  ### Linux stuff
 
   if [ -n "$CODESPACES" ]; then
     # Just so I can find this easily
@@ -111,7 +110,7 @@ else
 
   fi
 
-  # enable color support of ls and also add handy aliases
+  # enable color support of ls and also add handy color-related aliases
   if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -129,11 +128,12 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 
-# Work stuff (we don't love spring, but rely on lefthook for pre-commit hooks))
+# ${CURRENT_JOB} stuff
 export DISABLE_SPRING=true
 export LEFTHOOK_BIN=bin/lefthook
-
 alias aws-refresh='aws sso logout --profile development && bin/wb aws sso-login'
+
+# General coding stuff
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d; [ -x bin/update ] && bin/update'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
