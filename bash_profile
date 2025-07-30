@@ -133,6 +133,7 @@ export PROMPT_DIRTRIM=2
 export DISABLE_SPRING=true
 export LEFTHOOK_BIN=bin/lefthook
 
+alias aws-refresh='aws sso logout --profile development && bin/wb aws sso-login'
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
