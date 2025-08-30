@@ -135,10 +135,33 @@ alias aws-refresh='aws sso logout --profile development && bin/wb aws sso-login'
 
 # General coding stuff
 alias m='cd ~/code/chesterbr/minitruco-android'
-alias gitup='git co main && git pull && git branch --merged | grep -v main | xargs git branch -d; [ -x bin/update ] && bin/update'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
 # shellcheck disable=SC2142
 alias ghclone='__ghclone() { cd ~/code && gh repo clone "$1" "$1" && cd "$1" ; }; __ghclone'
+# Updates the main branch (or the current one if you type "gitup this")
+# so that your local branch is up to date with the tracked remote, if any
+gitup() {
+  set -e
+  if [ "$1" != "this" ]; then
+    git co main
+  fi
+
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  remote=$(git config branch."$branch".remote 2>/dev/null || echo "origin")
+  remote_branch=$(git config branch."$branch".merge 2>/dev/null | sed 's|refs/heads/||')
+  echo "== Updating $branch <- $remote/$remote_branch"
+
+  git pull
+  git branch --merged | grep -v main | xargs git branch -d
+
+  if [ -x bin/update ]; then
+    bin/update
+  else
+    echo "bin/update not found; not running it"
+  fi
+
+  echo "== Done"
+}
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
