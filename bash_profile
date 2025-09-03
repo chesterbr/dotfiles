@@ -70,9 +70,14 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   # I don't care about your shell-of-the-week, Apple
   export BASH_SILENCE_DEPRECATION_WARNING=1
 
-  # Homebrew (hope they don't change this again)
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-
+  # Homebrew (yes, they change this according to architecture. Why, god, why?)
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    # For Apple Silicon
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  else
+    # For Intel
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
   # shellcheck disable=SC2046
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
