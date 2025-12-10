@@ -151,8 +151,14 @@ gitup() {
   remote_branch=$(git config branch."$branch".merge 2>/dev/null | sed 's|refs/heads/||')
   echo "== Updating $branch <- $remote/$remote_branch"
 
+  # Cleanup stale remote branches
+  git fetch origin --prune
+  # Bring current branch up to date
   git pull
-  git branch --merged | grep -v main | xargs git branch -d
+  # Delete branches merged to main, except main itself
+  git branch --merged main | grep -vE '^\*|main' | xargs -r git branch -d
+  # Optimize the repo
+  git gc
 
   if [ -x bin/update ]; then
     bin/update
