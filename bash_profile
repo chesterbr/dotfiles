@@ -132,6 +132,7 @@ fi
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
+export COLORTERM=truecolor
 
 # ${CURRENT_JOB} stuff
 export DISABLE_SPRING=true
