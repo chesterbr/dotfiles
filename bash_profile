@@ -130,6 +130,11 @@ fi
 
 ### OS-neutral stuff
 
+# Disable focus reporting in VSCode terminal (fixes ^[[I appearing on startup)
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+  printf '\e[?1004l'
+fi
+
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 export COLORTERM=truecolor
