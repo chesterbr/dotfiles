@@ -146,7 +146,7 @@ alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'
 alias ghclone='__ghclone() { cd ~/code && gh repo clone "$1" "$1" && cd "$1" ; }; __ghclone'
 # Updates the main branch (or the current one if you type "gitup this")
 # so that your local branch is up to date with the tracked remote, if any
-gitup() {
+gitup() (
   set -e
   if [ "$1" != "this" ]; then
     git co main
@@ -173,7 +173,7 @@ gitup() {
   fi
 
   echo "== Done"
-}
+)
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
