@@ -176,6 +176,7 @@ gitup() (
 
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
+prepend_to_path ~/.local/bin
 
 eval "$(rbenv init - bash)"
 
