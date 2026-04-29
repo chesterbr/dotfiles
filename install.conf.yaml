@@ -20,4 +20,32 @@
         path: bin/
         create: true
 
-
+- shell:
+  - command: |
+      if [[ "$(uname -s)" != "Darwin" ]]; then exit 0; fi
+      if ! command -v brew &>/dev/null; then
+        echo "Homebrew not found - install it first: https://brew.sh/"
+        exit 1
+      fi
+      brew install git gh bash bash-completion rbenv ruby-build
+    description: Installing Homebrew packages (macOS)
+    stdout: true
+    stderr: true
+  - command: |
+      if [[ "$(uname -s)" != "Darwin" ]]; then exit 0; fi
+      BREW_BASH="$(brew --prefix)/bin/bash"
+      if ! grep -qF "$BREW_BASH" /etc/shells; then
+        echo "Adding $BREW_BASH to /etc/shells (requires sudo)..."
+        sudo bash -c "echo $BREW_BASH >> /etc/shells"
+      fi
+      CURRENT_SHELL=$(dscl . -read /Users/$(whoami) UserShell 2>/dev/null | awk '{print $2}')
+      if [[ "$CURRENT_SHELL" != "$BREW_BASH" ]]; then
+        echo "Setting $BREW_BASH as default shell..."
+        chsh -s "$BREW_BASH"
+      else
+        echo "Homebrew bash is already the default shell."
+      fi
+    description: Setting Homebrew bash as default shell (macOS)
+    stdin: true
+    stdout: true
+    stderr: true
