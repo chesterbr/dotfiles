@@ -1,0 +1,61 @@
+<base>
+* Left number row: grave where = was, duplicate hyphen on KP
+[eql]>[grav]
+[kp]>[hyph]
+* Left inner column: hyphen, equal
+[hk1]>[hyph]
+[hk3]>[eql]
+* Right inner column: emoji picker (Ctrl+Cmd+Space)
+{hk4}>{-lwin}{-lctr}{spc}{+lctr}{+lwin}
+* Left bottom row: LCtrl, quote, Caps Lock, [, ]
+[lfn]>[lctr]
+[grav]>[apos]
+[left]>[obrk]
+[rght]>[cbrk]
+* Right number row: backspace where hyphen was
+[hyph]>[bspc]
+* Right home row: enter where apostrophe was
+[apos]>[ent]
+* Right bottom alpha: up arrow where / was
+[fsls]>[up]
+* Right bottom row: /, delete, left, down, right
+[up]>[fsls]
+[down]>[del]
+[obrk]>[left]
+[cbrk]>[down]
+[rfn]>[rght]
+* Left thumb: Command, Option, LShift, LCtrl at bottom (duplicate)
+[bspc]>[lwin]
+[del]>[lalt]
+[lalt]>[home]
+[home]>[end]
+[end]>[lctr]
+* Right thumb: PgUp, PgDn, Bksp, RCtrl at bottom (Enter/Space stay)
+[rwin]>[pgup]
+[rctr]>[pgdn]
+[pgup]>[pgdn]
+[pgdn]>[rctr]
+<keypad>
+* F-keys on number row, F11/F12 on q/w
+[1]>[f1]
+[2]>[f2]
+[3]>[f3]
+[4]>[f4]
+[5]>[f5]
+[6]>[f6]
+[7]>[f7]
+[8]>[f8]
+[9]>[f9]
+[0]>[f10]
+[q]>[f11]
+[w]>[f12]
+* KPShift+Backspace = Delete
+[hyph]>[del]
+* IJKL arrows
+[i]>[up]
+[j]>[left]
+[k]>[down]
+[l]>[rght]
+<function1>
+<function2>
+<function3>
