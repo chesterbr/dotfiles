@@ -175,6 +175,11 @@ gitup() (
   echo "== Done"
 )
 
+# Override org-managed Claude Code default (Sonnet) with Opus
+claude() {
+  command claude --model claude-opus-4-8 "$@"
+}
+
 prepend_to_path ~/bin
 prepend_to_path /usr/local/sbin
 prepend_to_path ~/.local/bin
