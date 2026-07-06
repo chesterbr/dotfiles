@@ -133,6 +133,10 @@ fi
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_pass.txt
 export PROMPT_DIRTRIM=2
 export COLORTERM=truecolor
+# Use VS Code for git/CLI editors; --wait so it blocks until the tab closes and
+# exits cleanly (bare `code` leaks terminal mouse codes into TUIs like Claude Code)
+export EDITOR="code --wait"
+export VISUAL="code --wait"
 
 # ${CURRENT_JOB} stuff
 export DISABLE_SPRING=true
