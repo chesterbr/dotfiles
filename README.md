@@ -1,6 +1,6 @@
 Just my dotfiles.　Not much to see here.
 
-- I use [dotbot](https://github.com/anishathalye/dotbot) just so it works semalessly on Mac/Linux/Codespaces
+- I use [dotbot](https://github.com/anishathalye/dotbot) just so it works seamlessly on Mac/Linux/Codespaces
 - Couple customizations mostly reflect my dubious taste in colors and shortcuts 😅
 - Self-reminders:
   - On a new mac:
