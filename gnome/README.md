@@ -115,6 +115,16 @@ records keys changed from this machine's defaults — here just `dock-position`,
 `dock-fixed`, `extend-height`, `always-center-icons` — and silently leans on the
 next box having the same Ubuntu defaults for `autohide`/`intellihide`.)
 
+## 6. Trackpad: Control-click = right-click (macOS secondary click)
+
+Hold physical **Control** and press the trackpad to get a right-click, like
+macOS. This one needs a small evdev daemon (Wayland can't do it in the
+compositor) plus one GNOME setting — own runbook:
+[`ctrl-rightclick/README.md`](ctrl-rightclick/README.md).
+
+Note it disables GNOME's `Super+drag` window-move (`mouse-button-modifier ''`),
+because Toshy turns Control into Super in GUI apps.
+
 ---
 
 ### Re-capturing after future changes
