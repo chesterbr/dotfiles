@@ -1,7 +1,7 @@
 [user]
 	name = Carlos Duarte Do Nascimento
 	email = cd@pobox.com
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKq4jTM2lMzN//55kAtchkkuiZ7YYvxxtIJU9n0A5u2x
 [github]
 	user = chesterbr
 [push]
