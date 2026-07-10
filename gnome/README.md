@@ -48,11 +48,15 @@ shortcuts (copy/paste, tab switching, etc.) work like macOS.
 
 ## 3. GNOME Tweaks + Extension Manager
 
-The tools used to manage the rest:
+The tools used to manage the rest (exact commands used here; installed versions
+`gnome-tweaks 49.0-1`, Extension Manager `0.6.5` from Flathub):
 
 ```bash
-sudo apt install -y gnome-tweaks
-flatpak install -y flathub com.mattjakeman.ExtensionManager
+sudo apt install gnome-tweaks
+
+# Extension Manager is a Flatpak — ensure Flathub exists first (already set up here)
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.mattjakeman.ExtensionManager
 ```
 
 ## 4. Window controls: traffic lights on the left
