@@ -138,6 +138,21 @@ export COLORTERM=truecolor
 export EDITOR="code --wait"
 export VISUAL="code --wait"
 
+# 1Password SSH agent: ssh_config's IdentityAgent (set in ~/.ssh/config) only
+# covers the `ssh` client itself. Tools that talk to an agent directly - like
+# `ssh-keygen -Y sign`, which git uses for commit signing - need SSH_AUTH_SOCK
+# exported instead, so set it here too (only if the socket actually exists,
+# to stay a no-op on machines without 1Password, e.g. Codespaces).
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  onepassword_sock="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+else
+  onepassword_sock="$HOME/.1password/agent.sock"
+fi
+if [ -S "$onepassword_sock" ]; then
+  export SSH_AUTH_SOCK="$onepassword_sock"
+fi
+unset onepassword_sock
+
 # ${CURRENT_JOB} stuff
 export DISABLE_SPRING=true
 export LEFTHOOK_BIN=bin/lefthook
