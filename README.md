@@ -13,4 +13,5 @@ Just my dotfiles.　Not much to see here.
     2. Copy `~/.ssh/id_ed25519{,.pub}` over from another machine (used for both GitHub auth and commit signing; `gitconfig` sets `commit.gpgsign = true`)
     3. Run `./install` - symlinks dotfiles and apt-installs packages (will prompt for sudo password)
     4. `gh auth login` then `gh auth setup-git`, if `~/.gitconfig`'s `[credential]` blocks aren't already working
+    5. (Optional) Apply the Mac-like desktop tweaks (Firefox theme, Toshy keyboard, dock, window controls) — see [`gnome/README.md`](gnome/README.md)
   - If you add a new file, edit `install.conf.yaml` to include it
