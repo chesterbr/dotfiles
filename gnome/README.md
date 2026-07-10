@@ -25,8 +25,17 @@ Own runbook (it has a manual step): [`firefox/README.md`](firefox/README.md).
 [Toshy](https://github.com/RedBearAK/toshy) remaps modifiers so `Cmd`-based
 shortcuts (copy/paste, tab switching, etc.) work like macOS.
 
-- Install per Toshy's README (clone the repo and run its setup script). Config
-  ends up in `~/.config/toshy`; the tray/GUI is `toshy-gui`.
+- Install with Toshy's official bootstrap (this is what was used here — it
+  downloads into `~/Downloads/toshy_<timestamp>/` and runs `setup_toshy.py`):
+
+  ```bash
+  bash -c "$(curl -L https://raw.githubusercontent.com/RedBearAK/toshy/main/scripts/bootstrap.sh || wget -O - https://raw.githubusercontent.com/RedBearAK/toshy/main/scripts/bootstrap.sh)"
+  ```
+
+  It's interactive and sets up systemd user services (`toshy-config.service`
+  et al.), autostart entries, and `~/.local/bin/toshy-*` scripts. Config ends up
+  in `~/.config/toshy`; the tray/GUI is `toshy-gui`. Installed versions here:
+  config `2026.06.21`, keymapper `xwaykeyz 1.23.3` (check with `toshy-versions`).
 - **Wayland/GNOME dependency:** Toshy needs a shell extension to read the focused
   window. This machine uses **Window Calls Extended**
   (`window-calls-extended@hseliger.eu`) — install it via Extension Manager (§3)
