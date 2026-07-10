@@ -49,3 +49,12 @@
     stdin: true
     stdout: true
     stderr: true
+  - command: |
+      if [[ "$(uname -s)" != "Linux" ]]; then exit 0; fi
+      if ! command -v apt-get &>/dev/null; then exit 0; fi
+      sudo apt-get update
+      sudo apt-get install -y git gh bash-completion build-essential vim rbenv ruby-build
+    description: Installing apt packages (Linux/Debian)
+    stdin: true
+    stdout: true
+    stderr: true
