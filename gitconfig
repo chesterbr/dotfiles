@@ -23,7 +23,7 @@
 [commit]
 	gpgsign = true
 [core]
-	excludesfile = /Users/chesterbr/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 	autocrlf = input
 [pull]
