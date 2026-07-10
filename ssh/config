@@ -3,6 +3,12 @@
 # hurt (per https://unix.stackexchange.com/a/577143), so let's leave it here
 Include bnn.config
 
+# Machine/OS-local overrides (not tracked by dotfiles, silently skipped if
+# absent). Used for UseKeychain on macOS: that keyword is an Apple-only
+# OpenSSH patch that fails to parse entirely on Linux - even inside a
+# non-matching Match/Include block - so it can't live in the shared config.
+Include ~/.ssh/config.local
+
 # Place wildcards in the end, so they can be overridden
 # (ssh always picks the first match)
 
@@ -10,11 +16,14 @@ Host cruzalinhas.com
  User chester
 
 Host *
- UseKeychain yes
  AddKeysToAgent yes
  IdentityFile ~/.ssh/id_ed25519
  ServerAliveInterval 30
  ServerAliveCountMax 6
 
-Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+# The 1Password SSH agent socket lives in a different place per OS
+Match exec "test $(uname -s) = Darwin"
+ IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+Match exec "test $(uname -s) = Linux"
+ IdentityAgent ~/.1password/agent.sock
