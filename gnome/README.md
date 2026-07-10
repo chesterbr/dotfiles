@@ -108,14 +108,12 @@ gsettings set $S always-center-icons true  # center icons if you ever flip exten
 > `extend-height false` is what makes it a compact, centered, macOS-style dock
 > floating at the bottom rather than a bar spanning the whole screen edge.
 
-For an exact backup/restore of every dock setting (icon size, indicators, etc.):
-
-```bash
-# back up
-dconf dump /org/gnome/shell/extensions/dash-to-dock/ > dock.dconf
-# restore
-dconf load /org/gnome/shell/extensions/dash-to-dock/ < dock.dconf
-```
+The commands above are self-contained — they set every key outright, so they
+don't depend on Ubuntu's vendor defaults and reproduce the dock reliably on a
+fresh box. (A raw `dconf dump` of this path is *not* a good substitute: it only
+records keys changed from this machine's defaults — here just `dock-position`,
+`dock-fixed`, `extend-height`, `always-center-icons` — and silently leans on the
+next box having the same Ubuntu defaults for `autohide`/`intellihide`.)
 
 ---
 
