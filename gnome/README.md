@@ -63,10 +63,27 @@ macOS puts close/minimize/maximize on the **left**:
 gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:'
 ```
 
-> This sets the *placement* for native GNOME apps. The colored-circle look for
-> the browser is handled by the Firefox theme (§1). Colored circles for *all*
-> native apps would additionally need a Mac-style GTK theme (e.g. WhiteSur) —
-> not installed here, so leave this out unless you add such a theme.
+This sets the *placement* for native GNOME apps. The colored-circle look in the
+browser is handled by the Firefox theme (§1).
+
+### Colored circles for native apps (optional — WhiteSur GTK theme)
+
+For actual macOS-style colored window buttons across native apps, install the
+[WhiteSur](https://github.com/vinceliuice/WhiteSur-gtk-theme) GTK theme. This is
+what's on disk here (installed to `~/.themes`), though **it is not currently the
+active theme — `Yaru-blue-dark` is** — so treat it as available, not applied:
+
+```bash
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/code/vinceliuice/WhiteSur-gtk-theme
+cd ~/code/vinceliuice/WhiteSur-gtk-theme
+./install.sh -m -a normal          # -m: monterey-style; -a normal: window-button variant
+```
+
+To actually switch to it (via GNOME Tweaks → Appearance, or gsettings):
+
+```bash
+gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
+```
 
 ## 5. Dock: bottom + auto-hiding, like the macOS Dock
 
