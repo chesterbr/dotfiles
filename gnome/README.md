@@ -101,7 +101,12 @@ gsettings set $S dock-fixed false        # let it hide instead of reserving spac
 gsettings set $S autohide true
 gsettings set $S intellihide true
 gsettings set $S intellihide-mode 'ALL_WINDOWS'
+gsettings set $S extend-height false     # size the dock to its icons + center it (not a full-width bar)
+gsettings set $S always-center-icons true  # center icons if you ever flip extend-height back on
 ```
+
+> `extend-height false` is what makes it a compact, centered, macOS-style dock
+> floating at the bottom rather than a bar spanning the whole screen edge.
 
 For an exact backup/restore of every dock setting (icon size, indicators, etc.):
 
