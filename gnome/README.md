@@ -46,26 +46,6 @@ shortcuts (copy/paste, tab switching, etc.) work like macOS.
   gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+mac')]"
   ```
 
-- **Custom: stop an accidental lone Option/Alt tap from opening the menu.** A
-  bare tap of the (physical) left Option key makes Firefox, the WhatsApp/Electron
-  snap, and GTK apps pop/focus their menu bar — easy to trigger by mistake. Toshy
-  can suppress this without touching the modifier: hold left Option is still a
-  real Alt (`Alt+Tab`, `Alt+<letter>` accelerators keep working), but a lone
-  tap+release emits keycode 0 (nothing), so no app sees a bare Alt. Add this to
-  the `user_custom_modmaps` slice in `~/.config/toshy/toshy_config.py` (the slice
-  survives Toshy upgrades), then `systemctl --user restart toshy-config.service`:
-
-  ```python
-  # Format is {key: [tap_action, hold_action]}. Right Option/AltGr left untouched.
-  multipurpose_modmap("Suppress accidental lone left-Option/Alt tap", {
-      Key.LEFT_ALT:               [Key.RESERVED, Key.LEFT_ALT],
-  })
-  ```
-
-  To show a menu *on purpose*: **F10** (Firefox/GTK — focuses the menu bar,
-  arrow-key to navigate, `Esc` to dismiss) or a **right-Option** tap (still a
-  real Alt; also the way to reveal WhatsApp/Electron's menu, which ignores F10).
-
 ## 3. GNOME Tweaks + Extension Manager
 
 The tools used to manage the rest (exact commands used here; installed versions
