@@ -16,6 +16,7 @@
         create: true
     ~/.vimrc: vimrc
     ~/.gemrc: gemrc
+    ~/.inputrc: inputrc
     ~/bin:
         path: bin/
         create: true
