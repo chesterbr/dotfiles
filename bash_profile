@@ -52,9 +52,7 @@ __bash_prompt() {
   # \[\033[0m\]    = Text Reset
   local hostname="\[\033[0m\]\h\[\033[0m\]"
   #shellcheck disable=SC2016
-  local userpart='`export XIT=$? \
-        && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;37m\]@${GITHUB_USER}" || echo -n "\[\033[0;37m\]\u" \
-        `'
+  local userpart='`export XIT=$? && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;37m\]@${GITHUB_USER}" || echo -n "\[\033[0;37m\]\u"`'
   #shellcheck disable=SC2016
   local gitbranch='\[\033[0;36m\](\[\033[1;31m\]$(git symbolic-ref --short HEAD 2>/dev/null)\[\033[0;36m\])'
   local yellow='\[\033[0;33m\]'
