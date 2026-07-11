@@ -17,6 +17,9 @@
     ~/.vimrc: vimrc
     ~/.gemrc: gemrc
     ~/.inputrc: inputrc
+    ~/.config/ghostty/config:
+        path: ghostty/config
+        create: true
     ~/bin:
         path: bin/
         create: true

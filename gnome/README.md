@@ -125,6 +125,37 @@ compositor) plus one GNOME setting — own runbook:
 Note it disables GNOME's `Super+drag` window-move (`mouse-button-modifier ''`),
 because Toshy turns Control into Super in GUI apps.
 
+## 7. Terminal: Ghostty (default, and the only one in search)
+
+[Ghostty](https://ghostty.org) is the terminal — it speaks the kitty keyboard
+protocol, so Shift+Enter works in Claude Code with no config (Ptyxis/VTE can't).
+Its own settings live in [`../ghostty/config`](../ghostty/config) (symlinked to
+`~/.config/ghostty/config` by dotbot).
+
+```bash
+sudo apt install -y ghostty
+```
+
+Make it the default terminal, and stop Ubuntu's built-in **Ptyxis** (whose app
+is literally named "Terminal", so it wins the "term" search) from showing up —
+**without uninstalling it** (Ubuntu leans on it; removing it can break things):
+
+```bash
+# Default terminal for xdg-terminal-exec (what GNOME's default-applications
+# terminal already points to) and the Debian x-terminal-emulator alternative:
+printf '%s\n' 'com.mitchellh.ghostty.desktop' > ~/.config/xdg-terminals.list
+sudo update-alternatives --set x-terminal-emulator /usr/bin/ghostty   # optional
+
+# Hide Ptyxis from the app grid / search via a local override (reversible:
+# just delete the file). Ptyxis stays installed and usable.
+cp /usr/share/applications/org.gnome.Ptyxis.desktop ~/.local/share/applications/
+sed -i '/^\[Desktop Entry\]/a NoDisplay=true' ~/.local/share/applications/org.gnome.Ptyxis.desktop
+update-desktop-database ~/.local/share/applications
+```
+
+(Search may take a moment or a re-login to drop Ptyxis. `~/.inputrc` in the repo
+root also teaches bash's readline to treat Shift+Enter as a newline.)
+
 ---
 
 ### Re-capturing after future changes
