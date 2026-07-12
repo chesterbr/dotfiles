@@ -115,15 +115,48 @@ records keys changed from this machine's defaults — here just `dock-position`,
 `dock-fixed`, `extend-height`, `always-center-icons` — and silently leans on the
 next box having the same Ubuntu defaults for `autohide`/`intellihide`.)
 
-## 6. Trackpad: Control-click = right-click (macOS secondary click)
+## 6. Trackpad (Apple bcm5974 clickpad)
 
-Hold physical **Control** and press the trackpad to get a right-click, like
-macOS. This one needs a small evdev daemon (Wayland can't do it in the
-compositor) plus one GNOME setting — own runbook:
-[`ctrl-rightclick/README.md`](ctrl-rightclick/README.md).
+This is an old Apple **bcm5974** clickpad — the whole surface is one physical
+button. Two concerns: taps, and how physical clicks map to buttons.
 
-Note it disables GNOME's `Super+drag` window-move (`mouse-button-modifier ''`),
-because Toshy turns Control into Super in GUI apps.
+**No tap-to-click.** Taps turn light touches into clicks, firing accidental
+clicks when you mean to reposition or drag — only a physical press should click.
+Also disable tap-and-drag (a tap-then-hold starting a drag):
+
+```bash
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click false
+gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
+```
+
+**Physical clicks via button areas.** libinput's *software button areas* make
+the bottom corners behave like real buttons:
+
+```bash
+gsettings set org.gnome.desktop.peripherals.touchpad click-method 'areas'
+```
+
+- **Left-click:** press the main area / bottom-left.
+- **Right-click:** press the **bottom-right corner** (macOS secondary click).
+- **Drag:** press-drag with one finger, or press-hold the bottom-left corner
+  with your thumb and move another finger. The corner-hold works because a
+  finger resting in a button area isn't counted toward pointer/scroll fingers —
+  a property only clickpads with `INPUT_PROP_BUTTONPAD` get.
+
+`mouse-button-modifier` is left empty (`''`) on purpose: Toshy maps physical
+Control→Super in GUI apps, so GNOME's default `<Super>`+drag window-move would
+turn a Ctrl+drag into a window move.
+
+```bash
+gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier ''
+```
+
+> Earlier this machine used an evdev daemon (`ctrl-rightclick/`) for *Ctrl+press
+> = right-click* (macOS Ctrl-click). It was removed in favor of `areas`: the
+> daemon had to strip the clickpad's `INPUT_PROP_BUTTONPAD` property to inject a
+> right-button, which disables software button areas — and with them the
+> press-anywhere-and-drag-with-a-second-finger gesture. The bottom-right corner
+> replaces it as the secondary click.
 
 ## 7. Terminal: Ghostty (default, and the only one in search)
 
