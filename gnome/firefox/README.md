@@ -5,7 +5,9 @@ buttons (red/yellow/green circles, correct order) and tab close buttons on the
 right. Purely cosmetic, applied through Firefox's `userChrome.css` mechanism.
 
 - [`chrome/userChrome.css`](chrome/userChrome.css) — the actual styling
-- [`user.js`](user.js) — one pref that tells Firefox to load `userChrome.css`
+- [`user.js`](user.js) — prefs applied on startup: load `userChrome.css`, and
+  stop a lone Alt/Option tap from opening the menu bar
+  (`ui.key.menuAccessKeyFocuses`)
 
 This is **not** part of `./install` — Firefox stores profiles in a randomized
 directory, so it can't be a plain dotbot symlink, and it needs a manual toolbar
