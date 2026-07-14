@@ -11,3 +11,9 @@ background-opacity = 1
 # Large scrollback. Ghostty measures this in BYTES, not lines; ~100 MB is an
 # enormous amount of history for negligible RAM. ("Infinite" isn't an option.)
 scrollback-limit = 100000000
+
+# No desktop notifications from Ghostty itself (defaults to clipboard-copy and
+# config-reload). They pile up unread in GNOME's message list, which Ubuntu Dock
+# then renders as a count badge on the icon — in the dock and the app grid both.
+# This does not affect OSC 9/777 notifications sent by programs in the terminal.
+app-notifications = false
