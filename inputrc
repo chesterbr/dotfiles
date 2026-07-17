@@ -1,0 +1,44 @@
+# ~/.inputrc — GNU Readline config.
+#
+# Readline is the line editor embedded in bash and many REPLs (irb/pry via
+# Reline, psql, sqlite3, python on Linux, gdb...). This is "layer 2": what the
+# editor DOES with the bytes the terminal sends, so these tweaks improve all of
+# them at once, not just bash.
+#
+# Gotcha: readline has NO inline comments — a '#' after a directive becomes part
+# of the value. Every comment must be on its own line.
+#
+# Reload in a running shell with:  Ctrl-X Ctrl-R
+
+# Shift+Enter -> insert a newline (multi-line commands), like Claude Code/iTerm2.
+# Ghostty sends an enhanced-keyboard sequence for Shift+Enter that plain bash
+# doesn't understand; map it to quoted-insert of a line-feed (C-v C-j) so it
+# drops a real newline into the buffer instead of submitting. Both spellings are
+# bound so it works whichever encoding Ghostty uses (modifyOtherKeys / kitty).
+"\e[27;2;13~": "\C-v\C-j"
+"\e[13;2u":    "\C-v\C-j"
+
+# Completion — friendlier, macOS-ish: ignore case; treat - and _ alike; one Tab
+# lists all matches; color by file type; highlight the part already typed; mark
+# symlinked dirs with a trailing /; smarter completion in the middle of a word.
+set completion-ignore-case on
+set completion-map-case on
+set show-all-if-ambiguous on
+set colored-stats on
+set colored-completion-prefix on
+set mark-symlinked-directories on
+set skip-completed-text on
+
+# History — type a prefix, then Up/Down to walk only the commands that match
+# (e.g. "git " then Up cycles just your git commands). On an empty line they act
+# like normal previous/next. Both normal and application-cursor arrows are bound.
+"\e[A": history-search-backward
+"\eOA": history-search-backward
+"\e[B": history-search-forward
+"\eOB": history-search-forward
+
+# Quality of life: no terminal beep; a multi-line paste waits for Enter instead
+# of auto-running; don't echo control characters like ^C.
+set bell-style none
+set enable-bracketed-paste on
+set echo-control-characters off
