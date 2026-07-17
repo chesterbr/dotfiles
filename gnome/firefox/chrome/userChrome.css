@@ -1,0 +1,61 @@
+/* 1. Safely line up the button block on the left side and add spacing */
+.titlebar-buttonbox {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  height: 100% !important;
+  margin-left: 10px !important; /* Adds the space of half a dot to the left side */
+}
+
+/* 2. Strip ALL internal Firefox graphics (removes the "x" and the double box) */
+.titlebar-buttonbox .titlebar-button,
+.titlebar-buttonbox .titlebar-button > .toolbarbutton-icon {
+  background-image: none !important;
+  list-style-image: none !important; /* Forces the white X and vector shapes out */
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 3. Force clean, standard-sized macOS circle frames */
+.titlebar-buttonbox .titlebar-button {
+  padding: 0 !important;
+  margin: 0 7px !important;
+  border-radius: 50% !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+}
+
+/* 4. Apply clean Mac traffic colors in the exact correct order */
+.titlebar-close {
+  background-color: #ff5f56 !important;
+  order: 1 !important;
+}
+
+.titlebar-min {
+  background-color: #ffbd2e !important;
+  order: 2 !important;
+}
+
+/* Forces both the regular maximize AND the maximized double-box to be identical green circles */
+.titlebar-max,
+.titlebar-restore {
+  background-color: #27c93f !important;
+  order: 3 !important;
+}
+
+/* Smooth hover brightness filter */
+.titlebar-button:hover {
+  filter: brightness(0.85);
+}
+
+/* 5. Clean layout rule for your tab close buttons on the right */
+.tab-close-button {
+  order: 1 !important;
+  margin-inline-start: 4px !important;
+  margin-inline-end: -2px !important;
+}
+.tab-icon-stack, .tab-label-container {
+  order: 0 !important;
+}
