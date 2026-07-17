@@ -179,9 +179,9 @@ gitup() (
   echo "== Done"
 )
 
-# Override org-managed Claude Code default (Sonnet) with Opus
-claude() {
-  command claude --model claude-opus-4-8 "$@"
+# Start Claude Code on Fable (org default is Opus) for tasks that need extra thinking
+fable() {
+  claude --model claude-fable-5 "$@"
 }
 
 prepend_to_path ~/bin
