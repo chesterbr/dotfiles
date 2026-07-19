@@ -213,18 +213,21 @@ root also teaches bash's readline to treat Shift+Enter as a newline.)
 ## 8. Window tiling: Magnet-style shortcuts
 
 Reproduces the [Magnet](https://magnet.crowdcafe.com/) shortcuts I use on macOS,
-with the same physical keys. GNOME 50 covers three of them natively — no
-extension. Magnet's quarters, thirds, top/bottom halves and center have **no
-native equivalent** and are not set up here.
+on the same physical keys. All of it runs on **Tiling Assistant**
+(`tiling-assistant@ubuntu.com`), which Ubuntu preinstalls and enables — no extra
+extension to add.
 
-| Magnet | Physical keys | What GNOME actually binds |
+| Magnet | Physical keys | What GNOME binds |
 | --- | --- | --- |
 | Left / right half | `Ctrl`+`Option`+`←`/`→` | `<Super><Alt>Left` / `Right` |
+| Top / bottom half | `Ctrl`+`Option`+`↑`/`↓` | `<Super><Alt>Up` / `Down` |
+| Quarters (TL/TR/BL/BR) | `Ctrl`+`Option`+`U`/`I`/`J`/`K` | `<Super><Alt>u`/`i`/`j`/`k` |
 | Maximize | `Ctrl`+`Option`+`Return` | `<Super><Alt>Return` |
+| Center | `Ctrl`+`Option`+`C` | `<Super><Alt>c` |
 | Move to other display | `Ctrl`+`Option`+`Cmd`+`←`/`→` | `<Super><Alt><Control>Left` / `Right` |
 
 The binding strings look unrelated to the keys pressed because Toshy remaps
-modifiers first — **in GUI apps only** (`toshy_config.py`, the `GUI - Mac kbd`
+modifiers first — **in GUI apps only** (in `toshy_config.py` the `GUI - Mac kbd`
 modmap is gated `not ctx_app_is_terminal`):
 
 | Physical | GNOME sees (GUI apps) | GNOME sees (terminals) |
@@ -233,73 +236,120 @@ modmap is gated `not ctx_app_is_terminal`):
 | `Option` | `Alt` | `Alt` |
 | `Cmd` | `Ctrl` | `Ctrl` |
 
-### 8a. Prerequisite: edge-tiling
+> **Don't use mutter's native tiling for this.** `org.gnome.mutter.keybindings
+> toggle-tiled-left`/`-right` look like the obvious choice, but Tiling Assistant
+> deliberately takes those over: it sets `org.gnome.mutter edge-tiling false` and
+> clears `toggle-tiled-*` back to `@as []`. Setting them appears to work, then
+> silently reverts (on shell reload / next login). An earlier version of this
+> section documented that dead end. Everything below goes through Tiling
+> Assistant's own schema instead.
 
-`toggle-tiled-left`/`-right` are **silent no-ops while `edge-tiling` is `false`**
-— the keys do nothing at all, with no error. This cost an hour; check it first
-if the halves ever stop working. It also enables mouse drag-to-edge snapping.
-
-```bash
-gsettings set org.gnome.mutter edge-tiling true
-```
-
-### 8b. The bindings
-
-`switch-to-workspace-left`/`right` have to give up their `<Super><Alt>` arrows
-(the exact combo Magnet wants). They keep `<Super>Page_Up`/`Down` and
-`<Control><Alt>` arrows — the latter being physical `Cmd`+`Option`+arrow, a
-decent home for workspace switching anyway.
+### 8a. Shortcuts
 
 ```bash
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Page_Up', '<Super>KP_Prior', '<Control><Alt>Left']"
-gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Page_Down', '<Super>KP_Next', '<Control><Alt>Right']"
+TA=org.gnome.shell.extensions.tiling-assistant
+gsettings set $TA tile-left-half           "['<Super>Left', '<Super>KP_4', '<Super><Alt>Left']"
+gsettings set $TA tile-right-half          "['<Super>Right', '<Super>KP_6', '<Super><Alt>Right']"
+gsettings set $TA tile-top-half            "['<Super>KP_8', '<Super><Alt>Up']"
+gsettings set $TA tile-bottom-half         "['<Super>KP_2', '<Super><Alt>Down']"
+gsettings set $TA tile-maximize            "['<Super>Up', '<Super>KP_5', '<Super><Alt>Return']"
+gsettings set $TA tile-topleft-quarter     "['<Super>KP_7', '<Super><Alt>u']"
+gsettings set $TA tile-topright-quarter    "['<Super>KP_9', '<Super><Alt>i']"
+gsettings set $TA tile-bottomleft-quarter  "['<Super>KP_1', '<Super><Alt>j']"
+gsettings set $TA tile-bottomright-quarter "['<Super>KP_3', '<Super><Alt>k']"
+gsettings set $TA center-window            "['<Super><Alt>c']"
 
-gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super><Alt>Left']"
-gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Super><Alt>Right']"
-gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Alt>F10', '<Super><Alt>Return']"
-
-# Second binding only; <Super><Shift> arrows are the GNOME default, kept as-is
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Super><Shift>Left', '<Super><Alt><Control>Left']"
+# Move to other display is plain GNOME, not the extension. <Super><Shift> arrows
+# are the stock binding, kept; the <Super><Alt><Control> one is the Magnet parity.
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left  "['<Super><Shift>Left', '<Super><Alt><Control>Left']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><Shift>Right', '<Super><Alt><Control>Right']"
 ```
 
-> Once during setup, `toggle-tiled-left`/`-right` were silently reset to `@as []`
-> after other keybindings were written. It never reproduced, so the cause is
-> unconfirmed — possibly the GNOME Settings shortcuts panel auto-clearing what it
-> considers a conflict. If the halves die, `gsettings get` them before assuming
-> Toshy is at fault.
+### 8b. Conflicts that must be cleared
 
-### 8c. Toshy keymap (required — the bindings alone don't work)
+`shift-overview-up`/`-down` ship on `<Super><Alt>Up`/`Down` and win over the
+tiling shortcuts — the symptom is top half working while **bottom half silently
+does nothing**. (It's the app-grid zoom; unused here.)
 
-Two problems the gsettings above cannot solve:
+```bash
+gsettings set org.gnome.shell.keybindings shift-overview-up   "@as []"
+gsettings set org.gnome.shell.keybindings shift-overview-down "@as []"
+```
 
-1. Toshy's own `GenGUI overrides: Ubuntu` keymap matches `Super-Left`/`Right`
-   and rewrites them to a workspace switch. It fires even with `Alt` also held,
-   and `[bind,...]` keeps `Alt` down, so GNOME receives `Super+Alt+Page_Down` —
-   bound to nothing. The arrows just die.
-2. In terminals the modmap above is disabled, so `Ctrl` never becomes `Super`
-   and GNOME never sees the combos at all.
+`switch-to-workspace-left`/`right` also have to give up their `<Super><Alt>`
+arrows — the exact combo Magnet wants. They keep `<Super>Page_Up`/`Down` and
+`<Control><Alt>` arrows, the latter being physical `Cmd`+`Option`+arrow.
+
+```bash
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left  "['<Super>Page_Up', '<Super>KP_Prior', '<Control><Alt>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Page_Down', '<Super>KP_Next', '<Control><Alt>Right']"
+```
+
+### 8c. Behavior: make it act like Magnet
+
+Out of the box Tiling Assistant is more opinionated than Magnet. Magnet moves
+exactly the window you asked for and ignores everything else:
+
+```bash
+TA=org.gnome.shell.extensions.tiling-assistant
+# Tiling popup: after tiling, offers other windows to fill the free space, and
+# swallows the next keypress. Very confusing when driving purely by keyboard.
+gsettings set $TA enable-tiling-popup false
+# Tile groups: makes tiling adapt to already-tiled neighbours instead of just
+# taking the half/quarter asked for, and raises tiled windows together.
+gsettings set $TA disable-tile-groups true
+gsettings set $TA enable-raise-tile-group false
+```
+
+### 8d. Toshy keymap (required — the bindings alone don't work)
+
+Two problems gsettings cannot solve:
+
+1. Toshy's own `GenGUI overrides: Ubuntu` keymap matches `Super-Left`/`Right` and
+   rewrites them to a workspace switch. It fires even with `Alt` also held, and
+   `[bind,...]` keeps `Alt` down, so GNOME receives `Super+Alt+Page_Down` — bound
+   to nothing. The arrows just die.
+2. In terminals the modmap is disabled, so `Ctrl` never becomes `Super` and GNOME
+   never sees the combos at all.
 
 Both are fixed by claiming the combos earlier in the chain. Add this inside the
-`SLICE_MARK_START: user_apps` marks in `~/.config/toshy/toshy_config.py` (that
-slice is evaluated before the overrides, and xwaykeyz is first-match-wins; the
-marks make it survive Toshy upgrades). Put it in the `User hardware keys` keymap:
+`SLICE_MARK_START: user_apps` marks in `~/.config/toshy/toshy_config.py`, in the
+`User hardware keys` keymap — that slice is evaluated before the overrides,
+xwaykeyz is first-match-wins, and the marks survive Toshy upgrades:
 
 ```python
     # GUI apps  - Ctrl is modmapped to Super, so pass the combo through intact.
     C("Super-Alt-Left"):        C("Super-Alt-Left"),        # Tile left half
     C("Super-Alt-Right"):       C("Super-Alt-Right"),       # Tile right half
+    C("Super-Alt-Up"):          C("Super-Alt-Up"),          # Tile top half
+    C("Super-Alt-Down"):        C("Super-Alt-Down"),        # Tile bottom half
     # Terminals - GUI modmap is disabled there, so Ctrl arrives as Ctrl.
     C("LC-Alt-Left"):           C("Super-Alt-Left"),        # Tile left half
     C("LC-Alt-Right"):          C("Super-Alt-Right"),       # Tile right half
+    C("LC-Alt-Up"):             C("Super-Alt-Up"),          # Tile top half
+    C("LC-Alt-Down"):           C("Super-Alt-Down"),        # Tile bottom half
+    C("LC-Alt-U"):              C("Super-Alt-U"),           # Tile top-left quarter
+    C("LC-Alt-I"):              C("Super-Alt-I"),           # Tile top-right quarter
+    C("LC-Alt-J"):              C("Super-Alt-J"),           # Tile bottom-left quarter
+    C("LC-Alt-K"):              C("Super-Alt-K"),           # Tile bottom-right quarter
+    C("LC-Alt-C"):              C("Super-Alt-C"),           # Center window
     C("LC-Alt-Enter"):          C("Super-Alt-Enter"),       # Maximize
     C("LC-Alt-RC-Left"):        C("Super-Alt-C-Left"),      # Move to left display
     C("LC-Alt-RC-Right"):       C("Super-Alt-C-Right"),     # Move to right display
 ```
 
-Then `systemctl --user restart toshy-config.service`. Test in **both** a GUI app
-and a terminal — they take different code paths, and a change can work in one
-while doing nothing in the other.
+Then `systemctl --user restart toshy-config.service`.
+
+**Always test in both a GUI app and a terminal.** They take different code paths,
+and a change can work in one while doing nothing in the other — that asymmetry is
+the single biggest time sink in this section.
+
+### 8e. Known issue
+
+On the external monitor (HDMI-2, fractional scale 1.25) the half/quarter
+shortcuts sometimes leave the window centered and unmoved, while the built-in
+display works correctly. Unresolved — fractional scaling is the suspect but has
+not been confirmed.
 
 ---
 
