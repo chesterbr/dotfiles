@@ -115,6 +115,7 @@ else
 
   # enable color support of ls and also add handy color-related aliases
   if [ -x /usr/bin/dircolors ]; then
+    # shellcheck disable=SC2015 # Stock Ubuntu snippet; the fallback-on-failure case is fine here
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
