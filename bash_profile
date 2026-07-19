@@ -192,6 +192,18 @@ gitup() (
   echo "== Done"
 )
 
+# Starting Claude Code from ~ means answering "no" to the trust prompt (there's
+# third-party code under there), so run it from the dotfiles repo instead - that's
+# what I'm doing 99% of the time I start it from home. Subshell, so the calling
+# shell stays in ~. Claude prints the cwd in its startup banner, so no surprises.
+claude() (
+  if [ "$PWD" = "$HOME" ] && [ -d ~/code/chesterbr/dotfiles ]; then
+    cd ~/code/chesterbr/dotfiles || return 1
+    echo "== Started from ~, switching to $PWD"
+  fi
+  command claude "$@"
+)
+
 # Start Claude Code on Fable (org default is Opus) for tasks that need extra thinking
 fable() {
   claude --model claude-fable-5 "$@"
