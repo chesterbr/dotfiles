@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Claude Code Notification hook — show a transient GNOME notification.
+#
+# Claude Code's built-in notification channels emit OSC escape sequences that the
+# terminal turns into desktop notifications. GNOME then stores those in the message
+# list, and Ubuntu Dock renders them as an unread-count badge on Ghostty that has to
+# be dismissed by hand — the same annoyance that `app-notifications = false` fixes
+# for Ghostty's own notifications. --transient shows the banner and forgets it.
+#
+# Wired up as a Notification hook in ~/.claude/settings.json. Reads the hook payload
+# ({message, title, notification_type}) as JSON on stdin.
+set -euo pipefail
+
+payload=$(cat)
+title=$(jq -r '.title // "Claude Code"' <<<"$payload")
+message=$(jq -r '.message // "Needs your input"' <<<"$payload")
+
+notify-send --transient --app-name="Claude Code" -- "$title" "$message"
