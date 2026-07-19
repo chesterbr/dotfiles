@@ -344,13 +344,6 @@ Then `systemctl --user restart toshy-config.service`.
 and a change can work in one while doing nothing in the other — that asymmetry is
 the single biggest time sink in this section.
 
-### 8e. Known issue
-
-On the external monitor (HDMI-2, fractional scale 1.25) the half/quarter
-shortcuts sometimes leave the window centered and unmoved, while the built-in
-display works correctly. Unresolved — fractional scaling is the suspect but has
-not been confirmed.
-
 ---
 
 ### Re-capturing after future changes
