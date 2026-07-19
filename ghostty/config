@@ -12,6 +12,12 @@ background-opacity = 1
 # enormous amount of history for negligible RAM. ("Infinite" isn't an option.)
 scrollback-limit = 100000000
 
+# Selecting text should not touch any clipboard — copy is an explicit act (Mac
+# habits die hard). Ghostty defaults this to true on Linux AND macOS, so this
+# line matters on both. Note middle-click paste from the selection clipboard
+# stays enabled regardless; Ghostty offers no switch for that.
+copy-on-select = false
+
 # No desktop notifications from Ghostty itself (defaults to clipboard-copy and
 # config-reload). They pile up unread in GNOME's message list, which Ubuntu Dock
 # then renders as a count badge on the icon — in the dock and the app grid both.
