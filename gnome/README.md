@@ -210,6 +210,97 @@ update-desktop-database ~/.local/share/applications
 (Search may take a moment or a re-login to drop Ptyxis. `~/.inputrc` in the repo
 root also teaches bash's readline to treat Shift+Enter as a newline.)
 
+## 8. Window tiling: Magnet-style shortcuts
+
+Reproduces the [Magnet](https://magnet.crowdcafe.com/) shortcuts I use on macOS,
+with the same physical keys. GNOME 50 covers three of them natively — no
+extension. Magnet's quarters, thirds, top/bottom halves and center have **no
+native equivalent** and are not set up here.
+
+| Magnet | Physical keys | What GNOME actually binds |
+| --- | --- | --- |
+| Left / right half | `Ctrl`+`Option`+`←`/`→` | `<Super><Alt>Left` / `Right` |
+| Maximize | `Ctrl`+`Option`+`Return` | `<Super><Alt>Return` |
+| Move to other display | `Ctrl`+`Option`+`Cmd`+`←`/`→` | `<Super><Alt><Control>Left` / `Right` |
+
+The binding strings look unrelated to the keys pressed because Toshy remaps
+modifiers first — **in GUI apps only** (`toshy_config.py`, the `GUI - Mac kbd`
+modmap is gated `not ctx_app_is_terminal`):
+
+| Physical | GNOME sees (GUI apps) | GNOME sees (terminals) |
+| --- | --- | --- |
+| `Ctrl` | `Super` | `Ctrl` (unchanged) |
+| `Option` | `Alt` | `Alt` |
+| `Cmd` | `Ctrl` | `Ctrl` |
+
+### 8a. Prerequisite: edge-tiling
+
+`toggle-tiled-left`/`-right` are **silent no-ops while `edge-tiling` is `false`**
+— the keys do nothing at all, with no error. This cost an hour; check it first
+if the halves ever stop working. It also enables mouse drag-to-edge snapping.
+
+```bash
+gsettings set org.gnome.mutter edge-tiling true
+```
+
+### 8b. The bindings
+
+`switch-to-workspace-left`/`right` have to give up their `<Super><Alt>` arrows
+(the exact combo Magnet wants). They keep `<Super>Page_Up`/`Down` and
+`<Control><Alt>` arrows — the latter being physical `Cmd`+`Option`+arrow, a
+decent home for workspace switching anyway.
+
+```bash
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Super>Page_Up', '<Super>KP_Prior', '<Control><Alt>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Super>Page_Down', '<Super>KP_Next', '<Control><Alt>Right']"
+
+gsettings set org.gnome.mutter.keybindings toggle-tiled-left "['<Super><Alt>Left']"
+gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Super><Alt>Right']"
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Alt>F10', '<Super><Alt>Return']"
+
+# Second binding only; <Super><Shift> arrows are the GNOME default, kept as-is
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Super><Shift>Left', '<Super><Alt><Control>Left']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Super><Shift>Right', '<Super><Alt><Control>Right']"
+```
+
+> Once during setup, `toggle-tiled-left`/`-right` were silently reset to `@as []`
+> after other keybindings were written. It never reproduced, so the cause is
+> unconfirmed — possibly the GNOME Settings shortcuts panel auto-clearing what it
+> considers a conflict. If the halves die, `gsettings get` them before assuming
+> Toshy is at fault.
+
+### 8c. Toshy keymap (required — the bindings alone don't work)
+
+Two problems the gsettings above cannot solve:
+
+1. Toshy's own `GenGUI overrides: Ubuntu` keymap matches `Super-Left`/`Right`
+   and rewrites them to a workspace switch. It fires even with `Alt` also held,
+   and `[bind,...]` keeps `Alt` down, so GNOME receives `Super+Alt+Page_Down` —
+   bound to nothing. The arrows just die.
+2. In terminals the modmap above is disabled, so `Ctrl` never becomes `Super`
+   and GNOME never sees the combos at all.
+
+Both are fixed by claiming the combos earlier in the chain. Add this inside the
+`SLICE_MARK_START: user_apps` marks in `~/.config/toshy/toshy_config.py` (that
+slice is evaluated before the overrides, and xwaykeyz is first-match-wins; the
+marks make it survive Toshy upgrades). Put it in the `User hardware keys` keymap:
+
+```python
+    # GUI apps  - Ctrl is modmapped to Super, so pass the combo through intact.
+    C("Super-Alt-Left"):        C("Super-Alt-Left"),        # Tile left half
+    C("Super-Alt-Right"):       C("Super-Alt-Right"),       # Tile right half
+    # Terminals - GUI modmap is disabled there, so Ctrl arrives as Ctrl.
+    C("LC-Alt-Left"):           C("Super-Alt-Left"),        # Tile left half
+    C("LC-Alt-Right"):          C("Super-Alt-Right"),       # Tile right half
+    C("LC-Alt-Enter"):          C("Super-Alt-Enter"),       # Maximize
+    C("LC-Alt-RC-Left"):        C("Super-Alt-C-Left"),      # Move to left display
+    C("LC-Alt-RC-Right"):       C("Super-Alt-C-Right"),     # Move to right display
+```
+
+Then `systemctl --user restart toshy-config.service`. Test in **both** a GUI app
+and a terminal — they take different code paths, and a change can work in one
+while doing nothing in the other.
+
 ---
 
 ### Re-capturing after future changes
