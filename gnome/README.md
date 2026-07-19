@@ -46,6 +46,27 @@ shortcuts (copy/paste, tab switching, etc.) work like macOS.
   gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us+mac')]"
   ```
 
+- **External Ergodox EZ:** Toshy types keyboards per-device and adapts its
+  modifier remapping to each. The MacBook's built-in keyboard matches its
+  `Apple` list, but the Ergodox matches nothing and falls through to the
+  `Windows` default — which swaps Alt↔Super so the key *innermost* to the
+  spacebar acts as Cmd. My [Oryx layout](../keyboards/README.md) already puts
+  Cmd/Super in the Mac position, so that swap flips Cmd and Option. Fix is to
+  declare it an Apple keyboard in `~/.config/toshy/toshy_config.py`, inside the
+  `SLICE_MARK_START: kbtype_override` marks so it survives Toshy upgrades:
+
+  ```python
+  keyboards_UserCustom_dct = {
+      # Exact match (casefolded), not regex — hence both names it exposes
+      'ZSA Technology Labs Ergodox EZ': 'Apple',
+      'ZSA Technology Labs Ergodox EZ Keyboard': 'Apple',
+  }
+  ```
+
+  Then `systemctl --user restart toshy-config.service`. Device names come from
+  `toshy-devices` (or `grep Name /proc/bus/input/devices`) — check them if a
+  firmware flash renames the board.
+
 ## 3. GNOME Tweaks + Extension Manager
 
 The tools used to manage the rest (exact commands used here; installed versions
