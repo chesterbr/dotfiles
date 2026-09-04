@@ -18,6 +18,10 @@ scrollback-limit = 100000000
 # stays enabled regardless; Ghostty offers no switch for that.
 copy-on-select = false
 
+# Quit Ghostty entirely when the last window closes, instead of lingering as a
+# running app with no windows (the macOS default). One less thing in the dock.
+quit-after-last-window-closed = true
+
 # No desktop notifications from Ghostty itself (defaults to clipboard-copy and
 # config-reload). They pile up unread in GNOME's message list, which Ubuntu Dock
 # then renders as a count badge on the icon — in the dock and the app grid both.
