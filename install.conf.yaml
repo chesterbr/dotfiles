@@ -23,6 +23,16 @@
     ~/bin:
         path: bin/
         create: true
+    ~/.claude/settings.json:
+        path: claude/settings.json
+        force: true
+    ~/.claude/CLAUDE.md:
+        path: claude/CLAUDE.md
+        force: true
+    ~/.claude/commands/prepare-pr.md:
+        path: claude/commands/prepare-pr.md
+        create: true
+        force: true
 
 - shell:
   - command: |
