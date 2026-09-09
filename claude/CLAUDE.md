@@ -67,6 +67,26 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 - After creating an issue or PR, `open` its URL in the browser. To show me any image or webpage,
   `open` it rather than relying on embedding alone.
 
+## Voice
+
+When I draft anything meant to sound like you (blog posts, PRs, reviews, messages), match your
+voice, not a generic one:
+
+- Calibrate from early, pre-AI sources - your blog (chester.me), older open-source / pre-Wrapbook
+  GitHub PRs - never recent samples, which I've already shaped.
+- Lead with the action, the driver, or the TL;DR, not setup.
+- Plain verbs, no coined metaphors or jargon.
+- Ideas over mechanics; don't re-explain what the diff or context already shows.
+- Cut filler and stat-padding; one or two anchors at most.
+- Don't quote people verbatim (exception: the subject's own words, when they genuinely illustrate
+  the point).
+- Vary structure; avoid templated openers that fingerprint as same-tool.
+- Don't frame motivation as leadership or management pressure; frame it as team or engineering
+  best-interest.
+- In PRs specifically: conversational description, tradeoffs as bullets, real numbered steps to
+  exercise, before/after visuals up front (right after the problem and fix), and no narration of
+  what was verified or how the specs work.
+
 ---
 
 <!--
