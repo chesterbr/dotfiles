@@ -14,12 +14,6 @@
     "defaultMode": "auto"
   },
   "model": "claude-opus-4-8",
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "tui": "default",
-  "skipWorkflowUsageWarning": true,
-  "skipAutoPermissionPrompt": true,
-  "autoUpdateChannel": "latest",
   "hooks": {
     "SessionStart": [
       {
@@ -73,6 +67,13 @@
     "linear@claude-plugins-official": true,
     "Notion@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true
-  }
+    "ruby-lsp@claude-plugins-official": true,
+    "ctx@wrapbook-claude-code-marketplace": true
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "tui": "default",
+  "skipWorkflowUsageWarning": true,
+  "skipAutoPermissionPrompt": true,
+  "autoUpdateChannel": "latest"
 }
