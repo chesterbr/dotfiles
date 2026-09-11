@@ -41,7 +41,7 @@
         echo "Homebrew not found - install it first: https://brew.sh/"
         exit 1
       fi
-      brew install git gh bash bash-completion rbenv ruby-build shellcheck
+      brew install git gh bash bash-completion rbenv ruby-build shellcheck gitleaks
     description: Installing Homebrew packages (macOS)
     stdout: true
     stderr: true
@@ -70,5 +70,16 @@
       sudo apt-get install -y git gh bash-completion build-essential vim rbenv ruby-build shellcheck
     description: Installing apt packages (Linux/Debian)
     stdin: true
+    stdout: true
+    stderr: true
+  - command: |
+      # gitleaks isn't packaged in apt; install the official release binary (no extra PM).
+      if [[ "$(uname -s)" != "Linux" ]]; then exit 0; fi
+      if command -v gitleaks &>/dev/null; then exit 0; fi
+      case "$(uname -m)" in x86_64) a=x64;; aarch64|arm64) a=arm64;; *) a=x64;; esac
+      v=$(curl -fsSL https://api.github.com/repos/gitleaks/gitleaks/releases/latest | grep -oP '"tag_name":\s*"v\K[^"]+')
+      curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/v${v}/gitleaks_${v}_linux_${a}.tar.gz" | tar -xz gitleaks
+      sudo install gitleaks /usr/local/bin/ && rm -f gitleaks
+    description: Installing gitleaks release binary (Linux)
     stdout: true
     stderr: true

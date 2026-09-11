@@ -3,6 +3,6 @@
 __pycache__/
 *.pyc
 
-# Claude: never commit machine-local / private overlays (this repo is public)
-claude/**/*.local.md
-claude/**/*.local.json
+# machine-local / private overlays (this repo is PUBLIC) - never committed, in any dir
+*.local
+*.local.*
