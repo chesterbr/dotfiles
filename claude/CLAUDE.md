@@ -55,6 +55,11 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 
 - Never commit, push, or create PRs without my explicit authorization, even when the work is ready
   and tested.
+- Rewriting or destroying already-published history or remote state - force-push (including
+  `--force-with-lease`), amending/rebasing/resetting a commit that's already pushed, deleting a
+  remote branch or tag - needs my explicit confirmation each time, even in auto-accept mode and even
+  when you already had authorization to commit and push. Authorization to publish is not
+  authorization to rewrite what's already published.
 - When I ask for an opinion or recommendation, give analysis only and stop. Take no action - no
   edits, posts, commits, or external writes - until I explicitly say to proceed. This holds even in
   auto-accept mode.
