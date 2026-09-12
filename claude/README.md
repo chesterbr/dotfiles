@@ -44,12 +44,14 @@ dotfiles.
 
 `sync.sh` is wired as Claude Code hooks in `settings.json`:
 
-- **SessionStart** → `sync.sh push` (push any unpushed commits)
-- **SessionEnd** → `sync.sh commit` (commit changes under `claude/`)
+- **SessionStart** → `sync.sh push`: pull latest fast-forward-only, then push local commits.
+- **SessionEnd** → `sync.sh commit`: commit tracked changes (`git add -u`, never `-A`) after a
+  secret scan (`gitleaks`, with a high-signal grep fallback) that aborts the commit on a likely
+  key or token.
 
-The commit is **scoped to `claude/`** so unrelated dotfile edits are never auto-published to this
-public repo. The split (commit at end, push at start) exists because a network push is too slow
-for the SessionEnd hook window.
+The split (commit at end, push at start) exists because a network push is too slow for the
+SessionEnd hook window. New/untracked files are never auto-committed: add them by hand with
+`git add` so nothing lands in this public repo by accident.
 
 ## Never commit here
 
@@ -57,7 +59,7 @@ This repo is public. These must never be added (they are gitignored and/or live 
 
 - `~/.claude/remote-settings.json` — contains an org telemetry API key
 - `~/.claude.json` and `~/.claude/backups/*` — account/OAuth state
-- any `*.local.md` / `*.local.json` — machine-local / private overlays
+- any `*.local` / `*.local.*` files: machine-local / private overlays (gitignored in every dir)
 
 ## First-time setup on a new machine
 
@@ -66,3 +68,21 @@ This repo is public. These must never be added (they are gitignored and/or live 
    in Claude Code run `/plugin marketplace add anthropics/claude-plugins-official`.
 3. Restart Claude Code. On the work machine, approve the one-time external-import prompt for
    `CLAUDE.work.md`.
+
+## Updating an existing machine
+
+For a machine that already has this config set up (symlinks in place, auto-sync running) but is
+behind, possibly by several versions. Safe to run interactively:
+
+1. Find the repo (its `origin` is `chesterbr/dotfiles`; usually `~/code/chesterbr/dotfiles`). The
+   hooks call `$HOME/code/chesterbr/dotfiles/claude/sync.sh`, so that path must resolve; if the
+   real repo lives elsewhere, symlink `~/code/chesterbr/dotfiles` to it.
+2. `git fetch`, then look at `git status -sb`:
+   - Behind and fast-forwardable: `git pull --ff-only`.
+   - Diverged (local unpushed commits from this machine's own auto-sync): stop and reconcile by
+     hand. Do not force or blind-rebase. `sync.sh` itself refuses a non-fast-forward pull for
+     exactly this reason.
+3. `../install` to refresh the symlinks and install any new tooling (on Linux this also installs
+   `gitleaks`, used by the commit secret scan).
+4. Verify: `~/.claude/settings.json` and `~/.claude/CLAUDE.md` are symlinks into this repo, the
+   working tree is clean and up to date with `origin/main`, and a Claude session starts cleanly.
