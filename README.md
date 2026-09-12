@@ -25,13 +25,17 @@ Personal/general Claude Code configuration lives in [`claude/`](claude/) and is 
 `~/.claude` by `./install`. It is the **base**, present on every machine; work (Wrapbook) config
 is layered on top only where that repo is checked out, and never lives here.
 
-**To (re)configure Claude on any machine — hand this to a Claude CLI:**
+**To set up or update Claude on any machine, hand this to a Claude CLI (or just say _"update this
+machine to the latest dotfiles, check the README"_):**
 
-> _"Read `claude/README.md` in this dotfiles repo and set up my personal Claude Code config on
-> this machine: run `./install` if the `~/.claude` symlinks aren't in place, confirm
-> `~/.claude/settings.json` and `~/.claude/CLAUDE.md` point into `claude/`, register the official
-> plugin marketplace if official plugins are missing, and verify a session starts cleanly. This is
-> a personal machine, so do NOT set up any Wrapbook/work config."_
+> _"Read `claude/README.md` in this dotfiles repo and bring my personal Claude Code config on this
+> machine up to the latest. If it isn't set up yet, follow 'First-time setup on a new machine'. If
+> it's already set up but behind (symlinks in place, auto-sync running), follow 'Updating an
+> existing machine': pull fast-forward-only, stop and ask me if it has diverged, re-run `./install`
+> to refresh symlinks and tooling, then verify the `~/.claude` symlinks point into `claude/` and a
+> session starts cleanly. Register the official plugin marketplace if official plugins are missing.
+> This is a personal machine, so do NOT set up any Wrapbook/work config, and do not commit, push,
+> or force anything without asking me first."_
 
 Anything private/machine-specific goes in an untracked `~/.claude/CLAUDE.personal.local.md`
 (imported automatically, skipped if absent) — never committed to this public repo. Full details,
