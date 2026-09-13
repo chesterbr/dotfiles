@@ -97,6 +97,13 @@ voice, not a generic one:
 ---
 
 <!--
+  Host inventory — my machines and how to reach them. General/personal, tracked in this public
+  repo, so it must stay free of IPs, MACs, keys, or anything secret. Imported directly from the
+  repo path (same style as the work overlay below).
+-->
+@~/code/chesterbr/dotfiles/claude/hosts.md
+
+<!--
   Work (Wrapbook) overlay — imported only on machines where the work config repo is
   checked out. Missing imports are silently skipped, so this line is harmless on
   personal machines. The first time it resolves on the work machine, Claude Code shows
