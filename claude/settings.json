@@ -12,10 +12,10 @@
       "mcp__plugin_Notion_notion__*"
     ],
     "ask": [
-      "Bash(git push:*--force*)",
-      "Bash(git commit:*--amend*)",
+      "Bash(git push*--force*)",
+      "Bash(git commit*--amend*)",
       "Bash(git rebase:*)",
-      "Bash(git reset:*--hard*)"
+      "Bash(git reset*--hard*)"
     ],
     "defaultMode": "auto"
   },
