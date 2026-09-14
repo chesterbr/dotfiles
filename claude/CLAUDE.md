@@ -90,9 +90,11 @@ voice, not a generic one:
 - Vary structure; avoid templated openers that fingerprint as same-tool.
 - Don't frame motivation as leadership or management pressure; frame it as team or engineering
   best-interest.
-- In PRs specifically: conversational description, tradeoffs as bullets, real numbered steps to
-  exercise, before/after visuals up front (right after the problem and fix), and no narration of
-  what was verified or how the specs work.
+- In PRs specifically: conversational description, tradeoffs as bullets, before/after visuals up
+  front (right after the problem and fix), and no narration of what was verified or how the specs
+  work. Steps to exercise are prescriptive, not descriptive - one action each, name the exact target
+  (which column, which button), link the navigation targets, and write for someone unfamiliar (fewer
+  choices; the familiar improvise anyway). Get the visuals early, not as a later amend.
 
 ---
 
@@ -102,6 +104,11 @@ voice, not a generic one:
   repo path (same style as the work overlay below).
 -->
 @~/code/chesterbr/dotfiles/claude/hosts.md
+
+<!--
+  General engineering references (cross-project, no employer-specific detail).
+-->
+@~/code/chesterbr/dotfiles/claude/references/github-stacks.md
 
 <!--
   Work (Wrapbook) overlay — imported only on machines where the work config repo is
