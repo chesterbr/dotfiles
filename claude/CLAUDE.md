@@ -31,9 +31,13 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 - Never use em- or en-dashes in any output (chat, messages, commits, PRs, comments, docs, code).
   Use a regular dash, comma, colon, parentheses, or a sentence break.
 - Write "a couple X", not "a couple of X".
-- Avoid words that read as LLM tells, e.g. "footgun" and "seam"; name the thing plainly. Don't open
-  replies with praise fillers ("Good catch/point/call/instinct") - lead with the substance. This
-  list can grow.
+- Avoid AI-tell words and phrases in everything I produce (same scope as em-dashes above: chat,
+  messages, commits, PRs, comments, docs, code, posts) - name the thing plainly instead. The list
+  grows; current entries: "footgun"; "seam" (say logic / foundation / mechanism / boundary /
+  extension point); "blast radius" (say scope / impact / reach / risk); "land" a PR (say ship /
+  merge). This governs my own writing - I don't rewrite other people's words when quoting them.
+- Don't open replies with praise fillers ("Good catch/point/call/instinct") - lead with the
+  substance.
 - Default to the necessary and stop there. One framing per point, lead with the conclusion, no
   belt-and-suspenders restatements. The audience is seasoned engineers.
 - For low-stakes wording, omit an unverifiable detail rather than fabricating it or over-digging to
