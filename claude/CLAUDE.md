@@ -54,6 +54,15 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   it's a pattern, not a one-off.
 - If a useful CLI tool is missing, fall back so the task isn't blocked, then name the tool and offer
   to install it. Don't auto-install and don't silently skip it.
+- Before naming a specific cause (a commit, PR, person, root cause) and acting on it or writing it
+  into an artifact, ask what would make the tool wrong and confirm against an independent source,
+  proportional to the cost of being wrong; a named-person or named-PR claim written into a live
+  artifact needs at least one independent confirmation first. Run a plausibility smell test too: a
+  result that doesn't fit (an unrelated PR touching an unrelated file) is a hypothesis to verify, not
+  a fact. For git history specifically: `git blame`, `git log -S`, and `git log <file>` report the
+  oldest *visible* commit as the origin, so a result landing on a root commit or a shallow boundary
+  (`git rev-parse --is-shallow-repository` is true) is a boundary, not an origin - cross-check with
+  GitHub before attributing a PR or author.
 
 **Acting on my behalf**
 
