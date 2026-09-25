@@ -190,6 +190,13 @@ gitup() (
     echo "bin/update not found; not running it"
   fi
 
+  if [ -f Procfile ] && command -v overmind >/dev/null 2>&1; then
+    if overmind status >/dev/null 2>&1; then
+      echo "== Overmind is running; restarting its processes"
+      overmind restart
+    fi
+  fi
+
   echo "== Done"
 )
 
