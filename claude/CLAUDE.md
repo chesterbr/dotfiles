@@ -41,6 +41,9 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   substance.
 - Default to the necessary and stop there. One framing per point, lead with the conclusion, no
   belt-and-suspenders restatements. The audience is seasoned engineers.
+- Don't restate what the code, diff, or a prior comment already shows, and don't walk the reader
+  through details they'll read off the code themselves - point to where it is and give only the
+  conclusion or the non-obvious why.
 - For low-stakes wording, omit an unverifiable detail rather than fabricating it or over-digging to
   verify it.
 
