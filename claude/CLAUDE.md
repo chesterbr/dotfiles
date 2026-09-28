@@ -93,11 +93,11 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 
 ## Voice
 
-When I draft anything meant to sound like you (blog posts, PRs, reviews, messages), match your
+When you draft anything meant to sound like me (blog posts, PRs, reviews, messages), match my
 voice, not a generic one:
 
-- Calibrate from early, pre-AI sources - your blog (chester.me), older open-source / pre-Wrapbook
-  GitHub PRs - never recent samples, which I've already shaped.
+- Calibrate from early, pre-AI sources - my blog (chester.me), older open-source / pre-Wrapbook
+  GitHub PRs - never recent samples, which you've already shaped.
 - Lead with the action, the driver, or the TL;DR, not setup.
 - Plain verbs, no coined metaphors or jargon.
 - Ideas over mechanics; don't re-explain what the diff or context already shows.
