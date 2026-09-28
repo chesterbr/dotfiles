@@ -22,6 +22,9 @@ repo, while work command files are regular files in the work repo, so a symlinke
 and a regular-file command is work. This is a rule I apply whenever I touch config; it is not
 automatically enforced, since the general-vs-work call is a judgment.
 
+Voice convention: these configs are written in my voice - `I`/`me`/`my` = me (Chester), `you`/`your`
+= Claude. Keep that frame consistent when editing; don't flip it mid-section.
+
 ## Working preferences
 
 Durable, cross-context defaults for how I should work, on any machine and any project.
