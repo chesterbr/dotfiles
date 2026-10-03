@@ -20,7 +20,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "haiku",
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {

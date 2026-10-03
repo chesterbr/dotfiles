@@ -71,6 +71,22 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   (`git rev-parse --is-shallow-repository` is true) is a boundary, not an origin - cross-check with
   GitHub before attributing a PR or author.
 
+**Model choice**
+
+- My default is Opus 5 (set 2026-10-03). It is a deliberate trade: I pay more per token on everyday
+  work so that I never have to switch models mid-session, because a switch re-reads the whole
+  context and usually costs more than the cheaper model saves.
+- Raise model choice in your first reply to a task, not after planning. If the work would run fine
+  in a cheaper model (Sonnet 5 for most coding and writing, Haiku 4.5 for mechanical edits), say so
+  while the context is still small, and I will switch before we start.
+- Once a session is carrying real context, stop recommending a switch. Say instead that it is
+  cheaper to finish here and start the next task in the cheaper model.
+- Plan in the model that will execute the plan. Never plan in one model and then recommend another
+  for the execution, since that forces the re-read I am paying the Opus default to avoid.
+- With Opus as the default, savings come from delegation rather than from downgrading me: push bulk,
+  mechanical, or read-heavy work to a subagent with a cheaper `model` override, and use a fork when
+  the raw tool output is something I will not need again. Offer that instead of a model change.
+
 **Acting on my behalf**
 
 - Never commit, push, or create PRs without my explicit authorization, even when the work is ready
