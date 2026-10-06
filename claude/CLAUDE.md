@@ -33,6 +33,8 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 
 - Never use em- or en-dashes in any output (chat, messages, commits, PRs, comments, docs, code).
   Use a regular dash, comma, colon, parentheses, or a sentence break.
+- Use Canadian English spelling in prose (colour, behaviour, centre; -ize stays, e.g. organize).
+  Code identifiers, CSS/API names, and quoted text stay as-is (`color:`, `background`).
 - Write "a couple X", not "a couple of X".
 - Avoid AI-tell words and phrases in everything I produce (same scope as em-dashes above: chat,
   messages, commits, PRs, comments, docs, code, posts) - name the thing plainly instead. The list
