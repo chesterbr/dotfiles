@@ -36,6 +36,10 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 - Use Canadian English spelling in prose (colour, behaviour, centre; -ize stays, e.g. organize).
   Code identifiers, CSS/API names, and quoted text stay as-is (`color:`, `background`).
 - Write "a couple X", not "a couple of X".
+- Dates: always unambiguous in anything I produce (ISO `2026-11-10` or a month name, "Nov 10"),
+  never bare `11/10`. When a source gives me an American-style date, translate it for me. If I
+  can't tell with confidence which order a source uses (both parts <= 12 and no corroborating
+  context), flag it instead of guessing.
 - Avoid AI-tell words and phrases in everything I produce (same scope as em-dashes above: chat,
   messages, commits, PRs, comments, docs, code, posts) - name the thing plainly instead. The list
   grows; current entries: "footgun"; "seam" (say logic / foundation / mechanism / boundary /
