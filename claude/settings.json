@@ -20,6 +20,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -81,6 +82,5 @@
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
-  "autoUpdateChannel": "latest",
-  "model": "opus"
+  "autoUpdateChannel": "latest"
 }
