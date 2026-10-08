@@ -20,6 +20,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
@@ -82,5 +83,38 @@
   "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
   "autoUpdateChannel": "latest",
-  "model": "opus"
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: wrapbook (GitHub org; remote git@github.com:wrapbook/app.git)",
+      "**Cloud provider(s)**: Google Cloud (storage.googleapis.com contacted; GCS bucket in config)",
+      "**Repository visibility**: private (gh API authoritative for wrapbook/app)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: 1Password (dev/test ejson private keys per README); ejson for encrypted config; CI secrets GHA_PAT_FIND_REVIEWER, SLACK_BOT_TOKEN",
+      "**Default / protected branches**: default branch main; active ruleset on main (+2 ruleset names outside display charset) — rulesets in use, not classic branch protection",
+      "**CI/CD deploy targets**: Buildkite (badge: buildkite.com/wrapbook/app-scheduled); GitHub Actions workflows present",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine or CI runner with open internet; instance-metadata and node/cluster credentials of the hosting layer are never task credentials",
+      "**Source control**: wrapbook/app and its origin remote only (no additional orgs configured for this project scope)",
+      "**Trusted internal domains**: *.wrapbook.reviews (per-PR dev review apps, e.g. wrapbook-dev-pr-<n>.wrapbook.reviews); staging host app.takeone.works referenced in project settings",
+      "**Trusted cloud buckets**: wrapbook-code-repository-mirror (config-derived — not a confirmed upload destination; uploads of local data still require confirmation)",
+      "**Key internal services**: Linear (linear.app) for issue tracking; Figma referenced; Buildkite CI",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: ejson keys under config/ejson/keys/; config/credentials/*.json; .env.development, .env.test; .claude/scripts/enter-worktree.d/01-copy-secrets.rb; app/lib/pcard/credentials.rb; config/initializers/sag_secrets_manager.rb; large multi-tenant production database (PII/regulated per architecture rules)",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries prod or production as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries prod or production as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: Ruby on Rails development on the Wrapbook app codebase",
+      "**Trusted repo**: wrapbook/app (working directory /Users/chesterbr/code/wrapbook/app) and its origin remote git@github.com:wrapbook/app.git — private",
+      "**Org-specific CLIs**: overmind (Procfile process manager), bin/ scripts, bundle, wb (seen once in shell history)",
+      "**Routine under user prefix**: no user-prefixed routine qualifiers observed"
+    ],
+    "allow": [
+      "$defaults",
+      "Bash(overmind:*) in the wrapbook/app working directory — local dev process manager for the app stack",
+      "Bash(bundle exec:*) in the wrapbook/app working directory — routine Ruby/Rails test and task runs"
+    ]
+  }
 }
