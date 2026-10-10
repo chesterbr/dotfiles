@@ -20,7 +20,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -81,8 +81,12 @@
   "tui": "default",
   "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
-  "autoUpdateChannel": "latest",
   "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(overmind:*) in the wrapbook/app working directory — local dev process manager for the app stack",
+      "Bash(bundle exec:*) in the wrapbook/app working directory — routine Ruby/Rails test and task runs"
+    ],
     "environment": [
       "### Org-wide",
       "**Organization**: wrapbook (GitHub org; remote git@github.com:wrapbook/app.git)",
@@ -109,11 +113,7 @@
       "**Trusted repo**: wrapbook/app (working directory /Users/chesterbr/code/wrapbook/app) and its origin remote git@github.com:wrapbook/app.git — private",
       "**Org-specific CLIs**: overmind (Procfile process manager), bin/ scripts, bundle, wb (seen once in shell history)",
       "**Routine under user prefix**: no user-prefixed routine qualifiers observed"
-    ],
-    "allow": [
-      "$defaults",
-      "Bash(overmind:*) in the wrapbook/app working directory — local dev process manager for the app stack",
-      "Bash(bundle exec:*) in the wrapbook/app working directory — routine Ruby/Rails test and task runs"
     ]
-  }
+  },
+  "autoUpdateChannel": "latest"
 }
