@@ -46,6 +46,10 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   extension point); "blast radius" (say scope / impact / reach / risk); "land" a PR (say ship /
   merge); "airtight" (say covered / complete / thorough); "nit" (say small / minor). This governs my
   own writing - I don't rewrite other people's words when quoting them.
+- Avoid gendered or exclusionary defaults in anything I produce ("sir/madam", "guys" for a group,
+  "he/she"); use a neutral form that keeps the tone ("kind stranger", "folks", "they"). When a stock
+  phrase or joke depends on one, flag it with an alternative rather than silently rewriting. Quoted
+  words from others stay as-is.
 - Don't open replies with praise fillers ("Good catch/point/call/instinct") - lead with the
   substance.
 - Default to the necessary and stop there. One framing per point, lead with the conclusion, no
