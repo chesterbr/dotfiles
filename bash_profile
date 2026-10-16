@@ -200,6 +200,24 @@ gitup() (
   echo "== Done"
 )
 
+# After Homebrew upgrades node, the corepack yarn shims point at the deleted
+# Cellar version, so yarn vanishes and vite_ruby claims vite isn't installed.
+# Recreates the shims and restarts vite if overmind is running.
+fix_vite() (
+  set -e
+  shim_dir="$(brew --prefix)/bin"
+  rm -f "$shim_dir/yarn" "$shim_dir/yarnpkg"
+  corepack enable
+  echo "== yarn $(yarn --version)"
+
+  if [ -f Procfile ] && command -v overmind >/dev/null 2>&1; then
+    if overmind status >/dev/null 2>&1; then
+      echo "== Overmind is running; restarting vite"
+      overmind restart vite
+    fi
+  fi
+)
+
 # Starting Claude Code from ~ means answering "no" to the trust prompt (there's
 # third-party code under there), so run it from the dotfiles repo instead - that's
 # what I'm doing 99% of the time I start it from home. Subshell, so the calling
