@@ -17,6 +17,7 @@ Just my dotfiles.　Not much to see here.
     4. `gh auth login` then `gh auth setup-git`, if `~/.gitconfig`'s `[credential]` blocks aren't already working
     5. (Optional) Apply the Mac-like desktop tweaks (Firefox theme, Toshy keyboard, dock, window controls) — see [`gnome/README.md`](gnome/README.md)
     6. Claude Code: same as the mac step 5 above.
+  - [mise](https://mise.jdx.dev) is optional: `bashrc`/`bash_profile` only activate it if installed (Wrapbook's `bin/setup` installs it there). Where it is installed alongside rbenv, set a real rbenv global (`rbenv global <version>`, not `system`), or Ruby outside mise-pinned projects fails with a mise "shim fallback recursion" error
   - If you add a new file, edit `install.conf.yaml` to include it
 
 ## Claude Code config
