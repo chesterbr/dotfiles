@@ -240,6 +240,12 @@ prepend_to_path ~/.local/bin
 
 eval "$(rbenv init - bash)"
 
+# Shims (vs. the prompt hook in ~/.bashrc) so non-interactive shells spawned from here get
+# mise-managed tools too; after rbenv so mise wins where a project pins a version
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate bash --shims)"
+fi
+
 if command -v pyenv >/dev/null 2>&1; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
