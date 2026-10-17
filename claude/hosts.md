@@ -37,3 +37,21 @@ one is meant: identify by location/hardware, and ask if it's ambiguous.
 - A separate Bazzite install on a 16-inch MacBook, kept in Brazil. Set up locally from the machine
   itself and not yet synced into these dotfiles, so its specifics (login, tweaks) aren't captured
   here yet.
+
+## Hostinger VPS (production)
+
+The server that runs cruzalinhas, Toronto Transit (totransit) and the miniTruco server. It is
+provisioned and configured entirely by [chester-ansible-configs](https://github.com/chesterbr/chester-ansible-configs);
+its README has the steps to rebuild it.
+
+- **Reach:** DNS `prod.chester.me`. Always use the name, never the IP, since the IP changes when the
+  server is replaced. The apps have their own records (`cruzalinhas`, `totransit` and `minitruco`
+  under `chester.me`).
+- **SSH:** user `chesterbr`, key auth (the keys published on my GitHub account). Root and password
+  logins are disabled; sudo is passwordless.
+- **What runs:** nginx on port 80 and the apps under supervisor as the `server` user; miniTruco
+  listens on TCP 6912. No TLS yet (tracked in chester-ansible-configs issue #18).
+- **Plan:** Hostinger KVM 2 (2 vCPU, 8 GB), Ubuntu 26.04, prepaid for two years from 2026-10-17. It
+  replaced a previous KVM 2 whose renewal I cancelled (it expires on 2026-11-09).
+- **Replacing it:** point `prod.chester.me` at the new IP first, run the playbooks, validate, then
+  move the three app records.
