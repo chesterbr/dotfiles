@@ -27,3 +27,10 @@ quit-after-last-window-closed = true
 # then renders as a count badge on the icon — in the dock and the app grid both.
 # This does not affect OSC 9/777 notifications sent by programs in the terminal.
 app-notifications = false
+
+# Make ssh work on servers that lack Ghostty's terminfo (e.g. `htop` failing with
+# "cannot initialize terminal type xterm-ghostty"). `ssh-terminfo` installs the
+# terminfo on the remote host on first connect (needs `infocmp` here, `tic` there);
+# `ssh-env` falls back to TERM=xterm-256color if that fails. Features not listed
+# keep their defaults (cursor, title, path on; sudo off), so only these two are named.
+shell-integration-features = ssh-env,ssh-terminfo
