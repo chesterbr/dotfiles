@@ -144,6 +144,16 @@ voice, not a generic one:
   work. Steps to exercise are prescriptive, not descriptive - one action each, name the exact target
   (which column, which button), link the navigation targets, and write for someone unfamiliar (fewer
   choices; the familiar improvise anyway). Get the visuals early, not as a later amend.
+- Review comments I'll post: write the final-length version on the first pass, soft cap about 300
+  characters per comment (a `suggestion` block may exceed it). One or two sentences: what you
+  observed, then a question or soft ask. The review body is one line giving the verdict reason,
+  never a list of what was verified. Keep root cause, repro, and fix ideas in chat for me to pull
+  from; they go in a comment only when the cause is certain, and then as a `suggestion` block or
+  one line.
+- If a finding could be intentional, ask ("Is X intended?", "Should X?"); don't call it a bug or
+  prescribe a fix. State a bug only when it contradicts the ticket, description, or spec, or errors.
+- In chat, report review findings as the exact comment text you'd post plus your verdict lean.
+  Extras get one line each, at most two. No "what I checked" section unless I ask.
 
 ---
 
