@@ -91,11 +91,6 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     fi
   fi
 
-  # Ensure ssh key is on ssh-agent (with passphrase from keychain)
-  if ! ssh-add -l | grep -q -i "ed25519"; then
-    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-  fi
-
 else
   ### Linux stuff
 
@@ -149,6 +144,17 @@ else
 fi
 if [ -S "$onepassword_sock" ]; then
   export SSH_AUTH_SOCK="$onepassword_sock"
+  # A locked 1Password prompts on use, but a stale socket (app not running,
+  # or not restarted after an update) just fails, so flag that one up front
+  ssh-add -l >/dev/null 2>&1
+  if [ $? -eq 2 ]; then
+    echo "1Password SSH agent not responding: ssh/git signing won't work until 1Password is running" >&2
+  fi
+elif [[ "$(uname -s)" == "Darwin" ]]; then
+  # No 1Password: ensure ssh key is on the macOS ssh-agent (with passphrase from keychain)
+  if ! ssh-add -l 2>/dev/null | grep -q -i "ed25519"; then
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+  fi
 fi
 unset onepassword_sock
 
