@@ -27,13 +27,20 @@ Key facts to keep straight:
 - A stack's real payoff is **review/authoring** (each PR's diff shows only its own changes,
   and you can open the child before the parent merges), not deployment.
 
-## Caveat vs my git rules
+## Rules enforcement
 
-The native managed stack's auto-restack **rebases** child branches. That runs against the
-standing rule that rebasing an already-pushed branch needs explicit confirmation (and, where
-a stricter project rule applies, "never rebase pushed branches - reconcile with merge"). So
-default to a **plain base-branch stack** - set the base explicitly
-(`gh pr create --base <parent-branch>`) and, after the parent merges, reconcile the child
-with a **merge** (GitHub retargets the child's base to the default branch on parent merge; the
-merge brings in the squashed parent). Only opt into the native managed stack / `gh stack`
-auto-rebase when the rebase has been explicitly okayed.
+Every layer of a native stack is evaluated against the rules of the stack's **trunk** (usually
+`main`): required reviews, CODEOWNERS and status checks, as if it targeted the trunk directly. A
+plain base-branch stack gets the rules of the child's actual target (a feature branch, often
+none), so a child can look "approved" on a single review it would fail on the trunk. That
+enforcement is the main reason to make a stack native.
+
+## Caveat vs my git rules (decided 2026-10-20)
+
+The native managed stack's auto-restack **rebases** child branches, which runs against my rule
+that pushed branches aren't rebased. I accept it as a deliberate exception: **default to a
+native stack** for stacked PRs, and let GitHub restack its branches. The exception covers only
+GitHub's own restack of a native stack; I still never rebase or force-push by hand, and a plain
+base-branch stack (if I ever use one) is still reconciled with a **merge** after the parent
+merges. Merge bottom-up, one PR at a time: merging a higher layer also merges every unmerged
+layer below it, so only do that when I explicitly want the whole stack in.
