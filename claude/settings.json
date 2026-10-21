@@ -114,5 +114,10 @@
       "**Routine under user prefix**: no user-prefixed routine qualifiers observed"
     ]
   },
-  "autoUpdateChannel": "latest"
+  "autoUpdateChannel": "latest",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  }
 }
