@@ -79,6 +79,5 @@
   "effortLevel": "high",
   "tui": "default",
   "skipWorkflowUsageWarning": true,
-  "skipAutoPermissionPrompt": true,
-  "autoUpdateChannel": "latest"
+  "skipAutoPermissionPrompt": true
 }
