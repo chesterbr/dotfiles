@@ -73,20 +73,7 @@
     "linear@claude-plugins-official": true,
     "Notion@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true,
-    "wrapbook-mode@wrapbook-claude-code-marketplace": true,
-    "verify-wrapbook@wrapbook-claude-code-marketplace": true,
-    "frontend@wrapbook-claude-code-marketplace": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "pstack@pstack-claude": true
-  },
-  "extraKnownMarketplaces": {
-    "pstack-claude": {
-      "source": {
-        "source": "github",
-        "repo": "michael-denyer/pstack-claude"
-      }
-    }
+    "ruby-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
