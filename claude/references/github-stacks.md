@@ -27,6 +27,18 @@ Key facts to keep straight:
 - A stack's real payoff is **review/authoring** (each PR's diff shows only its own changes,
   and you can open the child before the parent merges), not deployment.
 
+## Deciding (2026-10-28)
+
+Make a stacked PR native without asking me. Two reasons, either enough: every layer is held to
+the trunk's review rules (below), and a native stack keeps open the option of merging the whole
+stack in one go (still bottom-up, one merge per PR) when the chance comes up. Adopt existing
+branches with `gh stack init <parent-branch> <child-branch>`, then `gh stack submit --auto`. If
+`gh stack` is missing, install it (`gh extension install github/gh-stack`).
+
+Timing: `gh stack submit` pushes every branch in the stack, so decide early but set the stack up
+late, once the code is unlikely to change from our own work or bot reviews (e.g. right before
+marking the child ready for review). Until then it stays a plain `--base <parent-branch>` PR.
+
 ## Rules enforcement
 
 Every layer of a native stack is evaluated against the rules of the stack's **trunk** (usually
