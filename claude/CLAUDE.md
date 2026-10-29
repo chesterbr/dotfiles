@@ -44,7 +44,7 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   messages, commits, PRs, comments, docs, code, posts) - name the thing plainly instead. The list
   grows; current entries: "footgun"; "seam" (say logic / foundation / mechanism / boundary /
   extension point); "blast radius" (say scope / impact / reach / risk); "land" a PR (say ship /
-  merge); "airtight" (say covered / complete / thorough); "nit" (say small / minor). This governs my
+  merge); "airtight" (say covered / complete / thorough); "nit" (say small / minor); "gate"/"gates" as a verb (say hides / controls / limits / requires). This governs my
   own writing - I don't rewrite other people's words when quoting them.
 - Avoid gendered or exclusionary defaults in anything I produce ("sir/madam", "guys" for a group,
   "he/she"); use a neutral form that keeps the tone ("kind stranger", "folks", "they"). When a stock
