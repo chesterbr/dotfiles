@@ -40,6 +40,8 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   never bare `11/10`. When a source gives me an American-style date, translate it for me. If I
   can't tell with confidence which order a source uses (both parts <= 12 and no corroborating
   context), flag it instead of guessing.
+- Times of day: Toronto local time (America/Toronto, EDT or EST per the date), labelled "ET" ("9:30 ET").
+  Convert UTC and API timestamps; never show bare UTC unless I ask.
 - Avoid AI-tell words and phrases in everything I produce (same scope as em-dashes above: chat,
   messages, commits, PRs, comments, docs, code, posts) - name the thing plainly instead. The list
   grows; current entries: "footgun"; "seam" (say logic / foundation / mechanism / boundary /
