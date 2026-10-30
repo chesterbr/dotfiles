@@ -162,6 +162,9 @@ unset onepassword_sock
 export DISABLE_SPRING=true
 export LEFTHOOK_BIN=bin/lefthook
 
+# Machine-local additions (not tracked)
+[ -f ~/.bash_profile.local ] && source ~/.bash_profile.local
+
 # General coding stuff
 alias m='cd ~/code/chesterbr/minitruco-android'
 alias ml='cd ~/code/chesterbr/private-study/python-ml; git status'

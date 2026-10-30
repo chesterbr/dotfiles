@@ -47,7 +47,8 @@ its README has the steps to rebuild it.
 - **Reach:** DNS `prod.chester.me`. Always use the name, never the IP, since the IP changes when the
   server is replaced. The apps have their own records (`cruzalinhas`, `totransit` and `minitruco`
   under `chester.me`).
-- **SSH:** user `chesterbr`, key auth (the keys published on my GitHub account).
+- **SSH:** key auth (the keys published on my GitHub account); login details are in
+  chester-ansible-configs.
 - **What runs:** nginx in front of the apps, all managed by the playbooks.
 - **Plan:** Hostinger KVM 2 (2 vCPU, 8 GB), Ubuntu 26.04, prepaid for two years from 2026-10-17. It
   replaced a previous KVM 2 whose renewal I cancelled (it expires on 2026-11-09).

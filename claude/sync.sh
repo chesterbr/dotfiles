@@ -12,8 +12,14 @@ set -euo pipefail
 #     never auto-published; opt them in with a manual `git add`.
 #   - a secret scan aborts the commit if a key/token slips into a tracked file.
 #   - *.local / *.local.* are gitignored everywhere as machine-specific escape hatches.
+#   - before pushing, outgoing commits go through the privacy check (claude/sync_privacy_check.py,
+#     rules in claude/references/sync-privacy.md); a flag or an unavailable check skips the push.
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"   # .../dotfiles
+LOG="$HOME/.cache/dotfiles-sync.log"
+
+# The privacy check runs headless Claude, whose own session hooks would call back into this script.
+[ -n "${CLAUDE_SYNC_CLASSIFIER:-}" ] && exit 0
 
 # Scan staged changes; non-zero => a likely secret is present. Prefer gitleaks (fast,
 # comprehensive); fall back to a high-signal grep if it isn't installed.
@@ -52,11 +58,21 @@ push() {   # SessionStart: integrate other machines first, then publish
     echo "dotfiles: pull is NOT fast-forward (diverged from another machine). Reconcile by hand; skipping push." >&2
     return 0
   fi
+  if [ -n "$(git log --oneline @{u}..HEAD)" ]; then
+    local rc=0
+    git diff @{u}..HEAD | python3 "$REPO_DIR/claude/sync_privacy_check.py" diff || rc=$?
+    if [ "$rc" -ne 0 ]; then
+      echo "dotfiles: push skipped (privacy check, see above). Fix it, then fold the fix into the unpushed commits with 'git reset --soft @{u}' and commit again." >&2
+      return 0
+    fi
+  fi
   git push -q || echo "dotfiles: push failed (see above)." >&2
 }
 
 case "${1:-}" in
   commit) commit ;;
-  push)   push ;;
+  # Hooks get 30s; the privacy check can take longer, so the hook only starts a detached run.
+  push)   mkdir -p "$(dirname "$LOG")"; nohup "$0" push-now >>"$LOG" 2>&1 & ;;
+  push-now) push ;;
   *) echo "Usage: $0 {commit|push}"; exit 1 ;;
 esac

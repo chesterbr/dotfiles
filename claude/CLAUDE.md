@@ -15,7 +15,9 @@ instructions, a setting - I first classify where it belongs:
 - **Work / employer-specific** (a particular employer's tools, repos, people, or workflows): the
   work config repo and its work-scoped memory, never this public file.
 - **Secret or sensitive**: the untracked local overlay (imported below) or a `*.private.md` file,
-  never committed to a shared repo.
+  never committed to a shared repo. What counts is in `references/sync-privacy.md` (no perf
+  reviews, 1:1s or judgements of named people in shared notes); every memory you write carries
+  `metadata.visibility: org | private` per that file, and the sync scripts enforce it.
 
 Mechanic on this machine: personal command files are symlinked into `~/.claude/commands/` from this
 repo, while work command files are regular files in the work repo, so a symlinked command is general
