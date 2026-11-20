@@ -33,6 +33,10 @@
         path: claude/commands/prepare-pr.md
         create: true
         force: true
+    ~/.claude/skills/debloat-fire-tv:
+        path: claude/skills/debloat-fire-tv
+        create: true
+        force: true
 
 - shell:
   - command: |

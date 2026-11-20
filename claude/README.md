@@ -13,6 +13,7 @@ only where that repo is checked out — this repo never contains work-specific c
 | `settings.json` | `~/.claude/settings.json` | Personal base settings: model, thinking/effort, macOS sound hooks, `/tmp` permissions, official-marketplace plugins, and the auto-sync hooks below. |
 | `CLAUDE.md` | `~/.claude/CLAUDE.md` | Global instructions. Imports the work overlay and a private local overlay (both optional / skipped if absent). |
 | `commands/` | files under `~/.claude/commands/` | Personal slash commands (e.g. `prepare-pr`). |
+| `skills/` | dirs under `~/.claude/skills/` | Personal skills (e.g. `debloat-fire-tv`). |
 | `sync.sh` | — | Auto commit/push of this `claude/` dir on Claude session start/end. |
 
 Linked via `../install.conf.yaml` (run `../install` to apply).
@@ -82,6 +83,13 @@ behind, possibly by several versions. Safe to run interactively:
    - Diverged (local unpushed commits from this machine's own auto-sync): stop and reconcile by
      hand. Do not force or blind-rebase. `sync.sh` itself refuses a non-fast-forward pull for
      exactly this reason.
+   - Diverged with **no common history** (`git merge-base HEAD @{u}` prints nothing; the remote
+     was rewritten, e.g. to scrub content): never merge or push the old history, it may hold what
+     the rewrite removed. `sync.sh push` logs this case to `~/.cache/dotfiles-sync.log`. Run
+     `claude/sync.sh recover`: it keeps the old history in a local `backup/pre-recover-*` branch
+     (never push it), saves uncommitted changes as a patch under `~/.cache/`, and moves the
+     checkout onto the remote. Then reapply by hand only the generic local-only changes
+     (`git diff <backup-branch> HEAD`).
 3. `../install` to refresh the symlinks and install any new tooling (on Linux this also installs
    `gitleaks`, used by the commit secret scan).
 4. Verify: `~/.claude/settings.json` and `~/.claude/CLAUDE.md` are symlinks into this repo, the

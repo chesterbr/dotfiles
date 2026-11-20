@@ -55,7 +55,11 @@ commit() {
 push() {   # SessionStart: integrate other machines first, then publish
   cd "$REPO_DIR"
   if ! git pull --ff-only -q; then
-    echo "dotfiles: pull is NOT fast-forward (diverged from another machine). Reconcile by hand; skipping push." >&2
+    if git merge-base HEAD @{u} >/dev/null 2>&1; then
+      echo "dotfiles: pull is NOT fast-forward (diverged from another machine). Reconcile by hand; skipping push." >&2
+    else
+      echo "dotfiles: this checkout and the remote share NO history (the remote was rewritten). Run '$0 recover', then reapply local-only changes by hand. Skipping push." >&2
+    fi
     return 0
   fi
   if [ -n "$(git log --oneline @{u}..HEAD)" ]; then
@@ -69,10 +73,34 @@ push() {   # SessionStart: integrate other machines first, then publish
   git push -q || echo "dotfiles: push failed (see above)." >&2
 }
 
+# The remote history was rewritten (e.g. to scrub content): park this checkout, then follow the remote.
+# Never run from a hook: the old history may hold what the rewrite removed, so it must not be pushed,
+# and reapplying local-only changes needs a human to judge each one.
+recover() {
+  cd "$REPO_DIR"
+  git fetch -q
+  if git merge-base HEAD @{u} >/dev/null 2>&1; then
+    echo "dotfiles: history is shared with the remote, nothing to recover." >&2
+    return 1
+  fi
+  local stamp branch patch
+  stamp="$(date '+%Y%m%d-%H%M%S')"
+  branch="backup/pre-recover-$stamp"
+  patch="$HOME/.cache/dotfiles-recover-$stamp.patch"
+  mkdir -p "$(dirname "$patch")"
+  git diff --binary HEAD > "$patch"             # uncommitted work, staged or not
+  git branch "$branch" HEAD
+  git reset -q --hard @{u}
+  echo "dotfiles: old history kept in local branch '$branch' (NEVER push it)."
+  echo "dotfiles: uncommitted changes saved to $patch"
+  echo "dotfiles: now on $(git rev-parse --short HEAD) = remote. Compare with 'git diff $branch HEAD' and reapply only what is generic."
+}
+
 case "${1:-}" in
   commit) commit ;;
+  recover) recover ;;
   # Hooks get 30s; the privacy check can take longer, so the hook only starts a detached run.
   push)   mkdir -p "$(dirname "$LOG")"; nohup "$0" push-now >>"$LOG" 2>&1 & ;;
   push-now) push ;;
-  *) echo "Usage: $0 {commit|push}"; exit 1 ;;
+  *) echo "Usage: $0 {commit|push|recover}"; exit 1 ;;
 esac
