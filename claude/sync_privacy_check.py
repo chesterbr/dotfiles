@@ -91,6 +91,12 @@ def classify(files, rules, audience, retry=True):
             '"reason": "<short; quote the offending phrase>"}]'
         )
         answers = ask_model(prompt)
+        if len(chunk) == 1 and len(answers) > 1:
+            # one document (a diff) that the model judged file by file: the worst verdict wins
+            if all(a.get("verdict") in ("ok", "private") for a in answers):
+                worst = next((a for a in answers if a["verdict"] == "private"), answers[0])
+                verdicts[chunk[0][0]] = (worst["verdict"], worst.get("reason", ""))
+            continue
         for item in answers:
             name = Path(str(item.get("file", ""))).name
             if len(chunk) == 1 and len(answers) == 1:
