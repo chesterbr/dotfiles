@@ -75,7 +75,7 @@ Not touched, but related: `secure amz_limit_ad_tracking` (0 = tracking allowed).
 ## Findings
 
 - The startup ad runs inside the launcher's `HomeActivity_vNext`, not in a separate package, so disabling
-  packages does not remove it. The `featured_item_video_enabled` switch does.
+  packages does not change it. The `featured_item_video_enabled` switch does.
 - Wake from sleep got much faster once the Home stopped loading video.
 - `pm trim-caches` works on Fire OS 7 (freed about 1 GB on AFTTI43). It clears every app's cache and
   keeps logins.

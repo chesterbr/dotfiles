@@ -1,6 +1,6 @@
 ---
 name: debloat-fire-tv
-description: Debloat an Amazon Fire TV or Fire TV Stick over ADB - disable ad, telemetry and unused Amazon packages, turn off home screen video autoplay and ad personalization, optionally trim caches. Idempotent, so it also re-applies the changes after a Fire OS update undoes them. Use when asked to debloat, clean up, speed up, or remove ads from a Fire TV or stick, or to re-check one already debloated.
+description: Debloat an Amazon Fire TV or Fire TV Stick over ADB - disable unused Amazon and telemetry packages, set the device's existing ad-related options (home screen video autoplay, ad personalization) to their lighter settings, optionally trim caches. Idempotent, so it also re-applies the changes after a Fire OS update undoes them. Use when asked to debloat, clean up, speed up, or lighten the ad settings of a Fire TV or stick, or to re-check one already debloated.
 license: MIT
 ---
 
@@ -20,8 +20,8 @@ no root or exploits, reversible, updates can undo it, their device and their res
   `pm disable-user`, `settings put` and `pm trim-caches`. Never root, never an exploit or vulnerability,
   never a way around a protection. If the OS refuses a change (a protected package), stop there and
   record it; do not look for another way in.
-- Never sideload or install apps, and never touch DRM or content protection. This skill removes and
-  quiets Amazon's own packages; it does not add anything to the device.
+- Never sideload or install apps, and never touch DRM or content protection. This skill turns off
+  Amazon's own packages and sets its existing options to lighter values; it does not add anything to the device.
 - Never `pm uninstall` and never `pm clear`. Uninstall can break the Home button and HDMI switching;
   `pm clear` wipes app data and signs the user out.
 - Never disable anything in the "Do not touch" list of `packages.md`.
