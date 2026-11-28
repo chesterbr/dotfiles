@@ -36,6 +36,27 @@ shortcuts (copy/paste, tab switching, etc.) work like macOS.
   et al.), autostart entries, and `~/.local/bin/toshy-*` scripts. Config ends up
   in `~/.config/toshy`; the tray/GUI is `toshy-gui`. Installed versions here:
   config `2026.06.21`, keymapper `xwaykeyz 1.23.3` (check with `toshy-versions`).
+- **Left Option accents in Ghostty:** Toshy's "Level3 via Left Alt" overlay
+  (on by default) lets the left Option type accents and symbols like the right
+  one, but skips every terminal. To extend it to Ghostty, add this inside the
+  `SLICE_MARK_START: user_apps` marks in `~/.config/toshy/toshy_config.py`, then
+  run `toshy-services-restart`:
+
+  ```python
+  try:
+      setup_level3_combos_via_left_alt(
+          when = lambda ctx:
+              ctx_ovl_level3_left_alt and
+              cnfg.screen_has_focus and
+              hmp_is_term_ghostty(ctx)
+      )
+  except NameError:
+      pass
+  ```
+
+  Trade-off: in Ghostty, left Option + letter, digit or punctuation is no longer
+  Alt/Meta (e.g. `Option+B`/`F` in the shell; `Esc` then the key still works).
+
 - **Wayland/GNOME dependency:** Toshy needs a shell extension to read the focused
   window. This machine uses **Window Calls Extended**
   (`window-calls-extended@hseliger.eu`) — install it via Extension Manager (§3)

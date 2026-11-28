@@ -19,6 +19,15 @@ instructions, a setting - I first classify where it belongs:
   reviews, 1:1s or judgements of named people in shared notes); every memory you write carries
   `metadata.visibility: org | private` per that file, and the sync scripts enforce it.
 
+Claude Code settings follow the same split. `~/.claude/settings.json` is generated, so never treat
+it as the source: a setting for **every machine** goes in `claude/settings.json` in the dotfiles
+repo; one for **this machine only** goes in the untracked `~/.claude/settings.overrides.json`. Then
+run `claude/apply_settings.py`. Differences between macOS and Linux belong in a portable script (like
+`claude/notify.sh`), not in per-machine copies of a setting. When a session reports unclassified
+settings changes (from `/config`, `/model`, plugin installs), ask me where each one goes. If it isn't
+clear whether something is shared or local, ask. Auto-memory stays on one machine: a rule that every
+machine needs goes in this file.
+
 Mechanic on this machine: personal command files are symlinked into `~/.claude/commands/` from this
 repo, while work command files are regular files in the work repo, so a symlinked command is general
 and a regular-file command is work. This is a rule I apply whenever I touch config; it is not
@@ -107,6 +116,11 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
 
 - Never commit, push, or create PRs without my explicit authorization, even when the work is ready
   and tested.
+- One standing exception: the dotfiles auto-sync hooks (`claude/sync.sh`) commit tracked changes
+  and push them on their own, on every machine, behind their secret scan and privacy check. It
+  covers only what the hooks do: commits and pushes you make yourself still need authorization.
+  Since they pick up any tracked change in that repo, never leave it half done there (such as a
+  tracked file that depends on a new, still untracked one).
 - Rewriting or destroying already-published history or remote state - force-push (including
   `--force-with-lease`), amending/rebasing/resetting a commit that's already pushed, deleting a
   remote branch or tag - needs my explicit confirmation each time, even in auto-accept mode and even

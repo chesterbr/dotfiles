@@ -23,9 +23,6 @@
     ~/bin:
         path: bin/
         create: true
-    ~/.claude/settings.json:
-        path: claude/settings.json
-        force: true
     ~/.claude/CLAUDE.md:
         path: claude/CLAUDE.md
         force: true
@@ -85,5 +82,9 @@
       curl -fsSL "https://github.com/gitleaks/gitleaks/releases/download/v${v}/gitleaks_${v}_linux_${a}.tar.gz" | tar -xz gitleaks
       sudo install gitleaks /usr/local/bin/ && rm -f gitleaks
     description: Installing gitleaks release binary (Linux)
+    stdout: true
+    stderr: true
+  - command: python3 claude/apply_settings.py
+    description: Generating ~/.claude/settings.json (shared base + this machine's overrides)
     stdout: true
     stderr: true

@@ -36,6 +36,11 @@
             "command": "\"$HOME/code/chesterbr/dotfiles/claude/sync.sh\" push",
             "timeout": 30,
             "async": true
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/code/chesterbr/dotfiles/claude/apply_settings.py\" --check",
+            "timeout": 10
           }
         ]
       }
@@ -58,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff"
+            "command": "\"$HOME/code/chesterbr/dotfiles/claude/notify.sh\" done"
           }
         ]
       }
@@ -68,7 +73,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Sosumi.aiff"
+            "command": "\"$HOME/code/chesterbr/dotfiles/claude/notify.sh\" attention"
           }
         ]
       }
@@ -89,6 +94,7 @@
     }
   },
   "tui": "default",
+  "preferredNotifChannel": "notifications_disabled",
   "skipWorkflowUsageWarning": true,
   "skipAutoPermissionPrompt": true,
   "autoMode": {

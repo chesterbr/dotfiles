@@ -9,7 +9,7 @@ Just my dotfiles.　Not much to see here.
     2. Clone this anywhere (e.g. `~/code/chesterbr/dotfiles`)
     3. Run `./install` - symlinks dotfiles, installs Homebrew packages, and sets up Homebrew bash as default shell (will prompt for password)
     4. `ssh-add --apple-use-keychain ~/.ssh/id_KEYTYPE` to add the ssh key passphrase to the Keychain (only needed once; bash_profile auto-adds ed25519 on new sessions)
-    5. Claude Code: `./install` already symlinked `~/.claude/{settings.json,CLAUDE.md}` and the personal commands. On first Claude run, if official plugins report "marketplace not found", run `/plugin marketplace add anthropics/claude-plugins-official` once. See [`claude/README.md`](claude/README.md).
+    5. Claude Code: `./install` already generated `~/.claude/settings.json` and symlinked `~/.claude/CLAUDE.md` and the personal commands. On first Claude run, if official plugins report "marketplace not found", run `/plugin marketplace add anthropics/claude-plugins-official` once. See [`claude/README.md`](claude/README.md).
   - On a new Linux box (e.g. Ubuntu):
     1. Clone this anywhere (e.g. `~/code/chesterbr/dotfiles`)
     2. Copy `~/.ssh/id_ed25519{,.pub}` over from another machine (used for both GitHub auth and commit signing; `gitconfig` sets `commit.gpgsign = true`)
@@ -33,7 +33,7 @@ machine to the latest dotfiles, check the README"_):**
 > machine up to the latest. If it isn't set up yet, follow 'First-time setup on a new machine'. If
 > it's already set up but behind (symlinks in place, auto-sync running), follow 'Updating an
 > existing machine': pull fast-forward-only, stop and ask me if it has diverged, re-run `./install`
-> to refresh symlinks and tooling, then verify the `~/.claude` symlinks point into `claude/` and a
+> to refresh symlinks and tooling, then run the checks in that README and make sure a
 > session starts cleanly. Register the official plugin marketplace if official plugins are missing.
 > This is a personal machine, so do NOT set up any Wrapbook/work config, and do not commit, push,
 > or force anything without asking me first."_

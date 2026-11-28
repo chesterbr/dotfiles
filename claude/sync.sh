@@ -36,7 +36,12 @@ secret_scan() {
     -e 'github_pat_[0-9A-Za-z_]{20,}' && return 1 || return 0
 }
 
+# A machine opts out of automatic commits and pushes with "env": {"DOTFILES_SYNC": "pull-only"}
+# in its ~/.claude/settings.overrides.json; it still pulls and regenerates its settings.
+pull_only() { [ "${DOTFILES_SYNC:-}" = "pull-only" ]; }
+
 commit() {
+  pull_only && return 0
   cd "$REPO_DIR"
   git add -u                                    # tracked files only, never -A
   if git diff --cached --quiet; then
@@ -62,6 +67,8 @@ push() {   # SessionStart: integrate other machines first, then publish
     fi
     return 0
   fi
+  python3 "$REPO_DIR/claude/apply_settings.py" || echo "dotfiles: Claude settings not regenerated (see above)." >&2
+  pull_only && return 0
   if [ -n "$(git log --oneline @{u}..HEAD)" ]; then
     local rc=0
     git diff @{u}..HEAD | python3 "$REPO_DIR/claude/sync_privacy_check.py" diff || rc=$?
