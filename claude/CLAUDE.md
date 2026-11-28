@@ -121,6 +121,11 @@ Durable, cross-context defaults for how I should work, on any machine and any pr
   covers only what the hooks do: commits and pushes you make yourself still need authorization.
   Since they pick up any tracked change in that repo, never leave it half done there (such as a
   tracked file that depends on a new, still untracked one).
+- When something is blocked (a denied permission, a safety check, a rule), a workaround is fine
+  only if it keeps the task what I asked for and respects the spirit of what blocked it. If getting
+  around it would change the task (its result, or settings or behaviour I asked for, even
+  temporarily) or you're unsure, ask me before doing it: say what was blocked, and whether I want
+  to authorize the original action or have you take the workaround you describe.
 - Rewriting or destroying already-published history or remote state - force-push (including
   `--force-with-lease`), amending/rebasing/resetting a commit that's already pushed, deleting a
   remote branch or tag - needs my explicit confirmation each time, even in auto-accept mode and even
