@@ -1,0 +1,13 @@
+[Unit]
+Description=Offline secondary CPUs during sleep (T2 slow resume workaround)
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c "echo 0 | tee /sys/devices/system/cpu/cpu[1-9]*/online"
+ExecStop=/bin/sh -c "echo 1 | tee /sys/devices/system/cpu/cpu[1-9]*/online"
+
+[Install]
+WantedBy=sleep.target

@@ -34,9 +34,10 @@ one is meant: identify by location/hardware, and ask if it's ambiguous.
 
 ### Bazzite (Brazil) — MacBook 16"
 
-- A separate Bazzite install on a 16-inch MacBook, kept in Brazil. Set up locally from the machine
-  itself and not yet synced into these dotfiles, so its specifics (login, tweaks) aren't captured
-  here yet.
+- A separate Bazzite install on a 16-inch MacBook (MacBookPro16,1), kept in Brazil.
+- **Wake-on-controller and faster resume:** files and install steps are in
+  [`bazzite/macbookpro16-1/`](../bazzite/macbookpro16-1/README.md). Its Bluetooth adapter is not
+  on USB, so the Canada setup doesn't apply.
 
 ## Hostinger VPS (production)
 
