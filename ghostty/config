@@ -34,8 +34,3 @@ app-notifications = false
 # `ssh-env` falls back to TERM=xterm-256color if that fails. Features not listed
 # keep their defaults (cursor, title, path on; sudo off), so only these two are named.
 shell-integration-features = ssh-env,ssh-terminfo
-
-# Paste only when there is something to paste; otherwise pass the key on to the
-# program, so Claude Code can read an image from the clipboard (Toshy sends Cmd+V
-# as Ctrl+Shift+V; needs the matching chat:imagePaste keybinding).
-keybind = performable:ctrl+shift+v=paste_from_clipboard
